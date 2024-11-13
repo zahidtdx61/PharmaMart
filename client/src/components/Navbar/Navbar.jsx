@@ -3,7 +3,7 @@ import { CgHeart, CgProfile, CgShoppingCart } from "react-icons/cg";
 import { CiLight } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMoonOutline } from "react-icons/io5";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import logo from "/pharma-logo.png";
 
@@ -56,7 +56,9 @@ const Navbar = () => {
           {/* icons */}
           <div className="w-[20%] flex items-center justify-end gap-4 text-primary-teal">
             <button>
-              <CgProfile size={30} />
+              <Link to="/registration">
+                <CgProfile size={30} />
+              </Link>
             </button>
             <button>
               <CgHeart size={30} />
