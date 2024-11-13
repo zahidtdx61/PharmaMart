@@ -190,7 +190,7 @@ const SignIn = ({ tabIndex }) => {
 
             <input
               type="submit"
-              className="w-full px-4 py-2 text-white font-medium bg-primary-teal hover:bg-green-900 active:bg-primary-teal rounded-lg duration-150 hover:cursor-pointer"
+              className="w-full px-4 py-2 text-white font-medium bg-primary-teal  hover:bg-primary-green active:bg-primary-teal rounded-lg duration-150 hover:cursor-pointer"
               value="Log In"
             />
           </form>
