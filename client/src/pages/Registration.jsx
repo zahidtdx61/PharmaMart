@@ -33,7 +33,7 @@ const Registration = () => {
       <Helmet>
         <title>PharmaMart | Registration</title>
       </Helmet>
-      <div className="flex flex-col items-center justify-center w-full max-w-2xl px-10 mx-auto mb-6 transition duration-500 ease-in-out transform bg-white rounded-lg md:mt-0">
+      <div className="flex flex-col items-center justify-center w-full max-w-2xl px-10 mx-auto mb-6 transition duration-500 ease-in-out transform rounded-lg md:mt-0">
         <Link
           to={"/"}
           className="text text-center  font-mulish text-primary-teal font-bold sm:text-3xl"
