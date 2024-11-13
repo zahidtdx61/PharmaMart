@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -88,10 +87,6 @@ const SignIn = ({ tabIndex }) => {
 
   return (
     <>
-      <Helmet>
-        <title>PharmaMart | Sign In</title>
-      </Helmet>
-
       <section className="relative w-full min-h-[calc(100vh-80px)] flex flex-col items-center justify-start mt-4 px-4">
         <div className="max-w-sm w-full text-gray-600 space-y-5">
           <div className="text-center pb-8">

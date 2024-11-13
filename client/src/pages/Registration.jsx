@@ -48,7 +48,7 @@ const Registration = () => {
               tab === 0 && "border-b-2 border-primary-teal text-primary-teal"
             } px-4 py-2`}
           >
-            Login
+            Sign In
           </button>
           <button
             onClick={() => tabIndex(1)}
@@ -56,7 +56,7 @@ const Registration = () => {
               tab === 1 && "border-b-2 border-primary-teal text-primary-teal"
             } px-4 py-2`}
           >
-            Register
+            Sign Up
           </button>
         </div>
 
