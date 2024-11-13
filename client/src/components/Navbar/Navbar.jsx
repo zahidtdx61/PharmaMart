@@ -1,7 +1,9 @@
-import { useColorScheme } from "@mui/joy";
+import { Divider, useColorScheme } from "@mui/joy";
 import { CgHeart, CgProfile, CgShoppingCart } from "react-icons/cg";
 import { CiLight } from "react-icons/ci";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMoonOutline } from "react-icons/io5";
+import { NavLink } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import logo from "/pharma-logo.png";
 
@@ -12,13 +14,19 @@ const Navbar = () => {
     setMode(mode === "light" ? "dark" : "light");
   };
 
+  const routes = [
+    { name: "Home", path: "/" },
+    { name: "Shop", path: "/shop" },
+    { name: "Cart Items", path: "cart-items" },
+  ];
+
   return (
     <div
       className={
-        mode === "light" ? "bg-white shadow-xl" : "bg-slate-900 shadow-md"
+        mode === "light" ? "bg-white shadow-md" : "bg-slate-900 shadow-md"
       }
     >
-      <div className="p-4 flex items-center justify-between gap-24">
+      <div className="p-4 mb-4 flex items-center justify-between gap-24">
         {/* logo part */}
         <div className="flex items-center gap-2">
           <div className="size-10">
@@ -29,7 +37,7 @@ const Navbar = () => {
             />
           </div>
 
-          <div className="text-5xl font-semibold text-primary-teal">
+          <div className="text-4xl font-semibold text-primary-teal">
             Pharma<span className="text-sec-mint-green">Mart</span>
           </div>
         </div>
@@ -46,7 +54,7 @@ const Navbar = () => {
           </div>
 
           {/* icons */}
-          <div className="w-[20%] flex items-center justify-end gap-4">
+          <div className="w-[20%] flex items-center justify-end gap-4 text-primary-teal">
             <button>
               <CgProfile size={30} />
             </button>
@@ -61,7 +69,7 @@ const Navbar = () => {
           {/* theme switcher */}
           <div
             onClick={changeTheme}
-            className="w-[10%] flex items-center justify-end"
+            className="w-[10%] flex items-center justify-end text-primary-teal"
           >
             {mode === "light" ? (
               <button>
@@ -74,6 +82,23 @@ const Navbar = () => {
             )}
           </div>
         </div>
+      </div>
+
+      <Divider />
+
+      <div className="px-4 my-4 pb-4 flex items-center gap-6 text-lg text-primary-teal">
+        <button>
+          <GiHamburgerMenu size={30} />
+        </button>
+        <>
+          {routes.map((route, index) => {
+            return (
+              <NavLink key={index} to={route.path}>
+                {route.name}
+              </NavLink>
+            );
+          })}
+        </>
       </div>
     </div>
   );
