@@ -33,6 +33,7 @@ const medicineSchema = new Mongoose.Schema({
   discount: {
     type: Number,
     required: true,
+    default: 0,
   },
   vendor_id: {
     type: Mongoose.Schema.Types.ObjectId,
