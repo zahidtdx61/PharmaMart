@@ -65,8 +65,6 @@ const getAllCategory = async (req, res) => {
 
 const addCategory = async (req, res) => {
   const category = req.body;
-  console.log(category);
-
   try {
     const newCategory = await Category.create(category);
     return res.status(StatusCodes.CREATED).json({

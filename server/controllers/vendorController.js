@@ -1,12 +1,47 @@
 const { StatusCodes } = require("http-status-codes");
 const Medicine = require("../models/medicine");
+const User = require("../models/user");
+const Category = require("../models/category");
 
 const addMedicine = async (req, res) => {
   const medicine = req.body;
   console.log(medicine);
+  const { expiryDate, manufactureDate } = medicine;
 
+  if (manufactureDate) {
+    medicine.manufacturingDate = new Date(manufactureDate);
+  }
+  if (expiryDate) {
+    medicine.expiryDate = new Date(expiryDate);
+  }
   try {
-    const newMedicine = await Medicine.create(medicine);
+    const vendor = await User.findOne({ uid: medicine.vendorId });
+    console.log(vendor);
+    if (!vendor) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: "Vendor not found",
+        data: {},
+        error: "Vendor not found",
+      });
+    }
+
+    const categoryData = await Category.findOne({ _id: medicine.categoryId });
+    console.log(categoryData);
+    if (!categoryData) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: "Category not found",
+        data: {},
+        error: "Category not found",
+      });
+    }
+
+    const newMedicine = await Medicine.create({
+      ...medicine,
+      vendor_id: vendor._id,
+      category: categoryData._id,
+    });
     return res.status(StatusCodes.CREATED).json({
       success: true,
       message: "Medicine added successfully",
@@ -14,6 +49,7 @@ const addMedicine = async (req, res) => {
       error: {},
     });
   } catch (error) {
+    console.log(error);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       success: false,
       message: "Medicine not added",
