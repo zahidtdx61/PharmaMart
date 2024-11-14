@@ -4,11 +4,15 @@ import { CiLight } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMoonOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import Loader from "../Loader/Loader";
+import UserInfo from "../UserInfo/UserInfo";
 import SearchBar from "./SearchBar";
 import logo from "/pharma-logo.png";
 
 const Navbar = () => {
   const { mode, setMode } = useColorScheme();
+  const { user, isLoading } = useAuth();
 
   const changeTheme = () => {
     setMode(mode === "light" ? "dark" : "light");
@@ -21,6 +25,13 @@ const Navbar = () => {
     { name: "Contact Us", path: "/contact" },
     { name: "About Us", path: "/about" },
   ];
+
+  if (isLoading) return <Loader />;
+  const { photoURL, displayName } = user || {};
+  console.log({
+    photoURL,
+    displayName,
+  });
 
   return (
     <div
@@ -58,15 +69,19 @@ const Navbar = () => {
           {/* icons */}
           <div className="w-[20%] flex items-center justify-end gap-4 text-primary-teal">
             <button>
-              <Link to="/registration">
-                <CgProfile size={30} />
-              </Link>
+              <CgHeart size={35} />
             </button>
             <button>
-              <CgHeart size={30} />
+              <CgShoppingCart size={35} />
             </button>
             <button>
-              <CgShoppingCart size={30} />
+              {user ? (
+                <UserInfo />
+              ) : (
+                <Link to="/registration">
+                  <CgProfile size={30} />
+                </Link>
+              )}
             </button>
           </div>
 

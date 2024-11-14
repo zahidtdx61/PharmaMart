@@ -9,6 +9,10 @@ const userSchema = new Mongoose.Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    required: true,
+  },
   uid: {
     type: String,
     required: true,
