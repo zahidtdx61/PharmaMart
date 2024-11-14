@@ -26,10 +26,6 @@ const Navbar = () => {
   ];
 
   const { photoURL, displayName } = user || {};
-  console.log({
-    photoURL,
-    displayName,
-  });
 
   return (
     <div

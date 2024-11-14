@@ -1,25 +1,70 @@
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import Select from "react-select";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import LoadContent from "../Loader/LoadContent";
 
 const AddMedicine = () => {
   const { register, handleSubmit } = useForm();
   const session = useAxiosSecure();
-  const { user } = useAuth();
+  const { user, isLoading, setIsLoading } = useAuth();
+  const [manufactureDate, setManufactureDate] = useState(new Date());
+  const [expiryDate, setExpiryDate] = useState(new Date());
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [tagError, setTagError] = useState(false);
+
+  const { data: options, isLoading: tagsLoading } = useQuery({
+    queryKey: ["category"],
+    queryFn: async () => {
+      const response = await session.get("/medicine/category");
+      const data = response.data;
+      const formattedOptions = data.data.map((item) => ({
+        label: item.name,
+        value: item._id,
+      }));
+      return formattedOptions;
+    },
+  });
 
   const submitData = async (data) => {
-    data.vendor_id = user.uid;
+    setTagError(false);
+    // console.log(data);
+    if (selectedOption === null) {
+      setTagError(true);
+      return;
+    }
+
+    data.vendorId = user.uid;
+    data.categoryId = selectedOption;
+    data.manufactureDate = manufactureDate;
+    data.expiryDate = expiryDate;
     console.log(data);
     try {
+      setIsLoading(true);
       const resp = await session.post("/vendor/add-medicine", data);
       toast.success(resp.data.message);
       console.log(resp);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.log(error.message);
       toast.error("Failed to add medicine");
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  if (isLoading || tagsLoading)
+    return (
+      <>
+        <LoadContent />
+      </>
+    );
 
   return (
     <div className="w-full mx-auto">
@@ -75,14 +120,17 @@ const AddMedicine = () => {
         </div>
 
         <div>
-          <label className="font-medium">Category</label>
-          <input
-            type="text"
-            {...register("category")}
+          <label htmlFor="image" className="font-medium">
+            Category:
+          </label>
+          <Select
             required
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
-            placeholder="Enter Medicine Category"
+            defaultValue={selectedOption}
+            onChange={({ value }) => setSelectedOption(value)}
+            options={options}
           />
+          {tagError && <p className="text-red-500">Please select a tag</p>}
         </div>
 
         <div>
@@ -119,17 +167,6 @@ const AddMedicine = () => {
         </div>
 
         <div>
-          <label className="font-medium">Email</label>
-          <input
-            type="email"
-            {...register("email")}
-            required
-            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
-            placeholder="Enter Email"
-          />
-        </div>
-
-        <div>
           <label className="font-medium">Status</label>
           <input
             type="text"
@@ -151,25 +188,27 @@ const AddMedicine = () => {
           />
         </div>
 
-        <div>
-          <label className="font-medium">Manufacturing Date</label>
-          <input
-            type="date"
-            {...register("manufacturingDate")}
-            required
+        <div className="flex flex-col lg:flex-row gap-4">
+          <div className="flex items-center gap-2">
+            <label className="font-medium">Manufacturing Date</label>
+            <DatePicker
+              className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
+              selected={manufactureDate}
+              onChange={(date) => setManufactureDate(date)}
+            />
+          </div>
+
+          <div className="flex items-center gap-2">
+          <label className="font-medium">Expiry Date</label>
+          <DatePicker
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
+            selected={expiryDate}
+            onChange={(date) => setExpiryDate(date)}
           />
+        </div>
         </div>
 
-        <div>
-          <label className="font-medium">Expiry Date</label>
-          <input
-            type="date"
-            {...register("expiryDate")}
-            required
-            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
-          />
-        </div>
+        
 
         <div className="text-center">
           <button

@@ -1,4 +1,5 @@
 import { CssBaseline, CssVarsProvider, extendTheme } from "@mui/joy";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
@@ -21,15 +22,19 @@ const theme = extendTheme({
   },
 });
 
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <HelmetProvider>
       <AuthProvider>
-        <CssVarsProvider theme={theme}>
-          <RouterProvider router={router} />
-          <Toaster />
-          <CssBaseline />
-        </CssVarsProvider>
+        <QueryClientProvider client={queryClient}>
+          <CssVarsProvider theme={theme}>
+            <RouterProvider router={router} />
+            <Toaster />
+            <CssBaseline />
+          </CssVarsProvider>
+        </QueryClientProvider>
       </AuthProvider>
     </HelmetProvider>
   </React.StrictMode>
