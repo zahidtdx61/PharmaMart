@@ -2,34 +2,46 @@ const { StatusCodes } = require("http-status-codes");
 const User = require("../models/user");
 
 const register = async (req, res) => {
-  try {
-    const { name, image, email, uid } = req.body;
-    const user = await User.create({
-      name,
-      image,
-      email,
-      uid,
-    });
+  const user = req.body;
 
-    return res.status(StatusCodes.CREATED).json({
-      success: true,
-      message: "User registered successfully!",
-      data: user,
-      error: {},
-    });
-  } catch (error) {
-    if (error.errorResponse.code === 11000) {
-      return res.status(StatusCodes.CONFLICT).json({
-        success: false,
-        message: "User already exists!",
-        data: {},
-        error: error.message,
-      });
+  const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  };
+
+  try {
+    const existingUser = await User.findOne({ uid: user?.uid });
+    const { token } = req.body;
+
+    if (existingUser) {
+      const updatedUser = await User.findByIdAndUpdate(existingUser._id, user);
+      return res
+        .cookie("token", token, cookieOptions)
+        .status(StatusCodes.OK)
+        .json({
+          success: true,
+          message: "User tokenized successfully",
+          data: updatedUser,
+          error: {},
+        });
     }
 
+    const newUser = await User.create(user);
+    return res
+      .cookie("token", token, cookieOptions)
+      .status(StatusCodes.CREATED)
+      .json({
+        success: true,
+        message: "User created successfully",
+        data: newUser,
+        error: {},
+      });
+  } catch (error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       success: false,
-      message: "User registration failed!",
+      message: "User not created",
       data: {},
       error: error.message,
     });
