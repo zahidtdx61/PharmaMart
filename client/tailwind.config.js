@@ -6,6 +6,11 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        lexend: ["Lexend", "sans-serif"],
+        "fira-sans": ["Fira Sans", " sans-serif"],
+        mulish: ["Mulish", "sans-serif"],
+      },
       colors:{
         "primary-green": "#00796B",
         "primary-teal": "#00A19D", //#00A19D
