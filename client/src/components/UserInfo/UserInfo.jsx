@@ -1,9 +1,7 @@
-import { useState } from "react";
+import { Avatar, Dropdown, Menu, MenuButton, MenuItem } from "@mui/joy";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { Avatar, Dropdown, Menu, MenuButton, MenuItem } from "@mui/joy";
 
 const UserInfo = () => {
   const { user, logOut, setIsLoading } = useAuth();
@@ -28,18 +26,18 @@ const UserInfo = () => {
   return (
     <>
       <div className="flex items-center justify-end gap-3">
-        
-
         <Dropdown>
-          <MenuButton className=""><Avatar src={photoURL} /></MenuButton>
+          <MenuButton>
+            <Avatar src={photoURL} />
+          </MenuButton>
           <Menu>
             <MenuItem>{displayName}</MenuItem>
-            <MenuItem><Link to="/dashboard">Dashboard</Link></MenuItem>
+            <MenuItem>
+              <Link to="/dashboard">Dashboard</Link>
+            </MenuItem>
             <MenuItem onClick={handleSignOut}>Log out</MenuItem>
           </Menu>
         </Dropdown>
-
-        
       </div>
     </>
   );

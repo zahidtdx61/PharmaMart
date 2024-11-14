@@ -2,6 +2,7 @@ import { CssBaseline, CssVarsProvider, extendTheme } from "@mui/joy";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
+import { Toaster } from "react-hot-toast";
 import { RouterProvider } from "react-router-dom";
 import AuthProvider from "./AuthProvider/AuthProvider.jsx";
 import "./index.css";
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <AuthProvider>
         <CssVarsProvider theme={theme}>
           <RouterProvider router={router} />
+          <Toaster />
           <CssBaseline />
         </CssVarsProvider>
       </AuthProvider>

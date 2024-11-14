@@ -1,14 +1,36 @@
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AddMedicine = () => {
   const { register, handleSubmit } = useForm();
+  const session = useAxiosSecure();
+  const { user } = useAuth();
+
+  const submitData = async (data) => {
+    data.vendor_id = user.uid;
+    console.log(data);
+    try {
+      const resp = await session.post("/vendor/add-medicine", data);
+      toast.success(resp.data.message);
+      console.log(resp);
+    } catch (error) {
+      console.log(error.message);
+      toast.error("Failed to add medicine");
+    }
+  };
+
   return (
     <div className="w-full mx-auto">
       <div className="w-fit mx-auto px-2 tracking-tight border-primary-green  text-center font-mulish font-semibold text-2xl text-primary-teal border-b-2">
         Add Your Medicine
       </div>
 
-      <form className="space-y-5 max-w-screen-lg p-4 mx-auto">
+      <form
+        onSubmit={handleSubmit(submitData)}
+        className="space-y-5 max-w-screen-lg p-4 mx-auto"
+      >
         <div>
           <label className="font-medium">Name</label>
           <input
@@ -127,6 +149,35 @@ const AddMedicine = () => {
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
             placeholder="Enter Quantity"
           />
+        </div>
+
+        <div>
+          <label className="font-medium">Manufacturing Date</label>
+          <input
+            type="date"
+            {...register("manufacturingDate")}
+            required
+            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
+          />
+        </div>
+
+        <div>
+          <label className="font-medium">Expiry Date</label>
+          <input
+            type="date"
+            {...register("expiryDate")}
+            required
+            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
+          />
+        </div>
+
+        <div className="text-center">
+          <button
+            type="submit"
+            className="px-4 py-2 font-semibold text-white bg-primary-green rounded-lg shadow-md hover:bg-primary-teal focus:outline-none focus:ring-2 focus:ring-primary-teal focus:ring-opacity-75"
+          >
+            Add Medicine
+          </button>
         </div>
       </form>
     </div>

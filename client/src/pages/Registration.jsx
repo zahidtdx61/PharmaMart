@@ -13,6 +13,7 @@ const Registration = () => {
   const navigation = useNavigation();
 
   if (navigation.state === "loading") return <Loader />;
+  
   if (isLoading)
     return (
       <>

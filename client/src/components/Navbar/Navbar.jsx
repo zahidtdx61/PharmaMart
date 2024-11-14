@@ -5,7 +5,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMoonOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import Loader from "../Loader/Loader";
 import UserInfo from "../UserInfo/UserInfo";
 import SearchBar from "./SearchBar";
 import logo from "/pharma-logo.png";
@@ -26,7 +25,6 @@ const Navbar = () => {
     { name: "About Us", path: "/about" },
   ];
 
-  if (isLoading) return <Loader />;
   const { photoURL, displayName } = user || {};
   console.log({
     photoURL,
