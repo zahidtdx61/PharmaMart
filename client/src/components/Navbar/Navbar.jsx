@@ -38,8 +38,8 @@ const Navbar = () => {
     <div
       className={
         mode === "light"
-          ? "bg-white shadow-md mt-4 px-2"
-          : "bg-slate-900 shadow-md mt-4 px-2"
+          ? "bg-white shadow-md mt-4"
+          : "bg-slate-900 shadow-md mt-4"
       }
     >
       <div className="mb-4 flex items-center justify-between gap-24">
@@ -60,7 +60,7 @@ const Navbar = () => {
 
         <div className="flex justify-end items-center gap-8  flex-1 w-full lg:w-[70%]">
           {/* need help */}
-          <div className="text-primary-teal w-[15%] text-center hidden lg:flex">
+          <div className="text-primary-teal w-[15%] text-center hidden lg:flex gap-1">
             Need help? <span className="font-semibold">0020 500</span>
           </div>
 
@@ -132,6 +132,30 @@ const Navbar = () => {
               </NavLink>
             );
           })}
+        </div>
+
+        {user === null ? (
+          <div className="flex gap-3 flex-1 justify-end">
+            <button className="px-5 py-1 bg-primary-teal text-white rounded-md">
+              <Link to="/registration">Join Us</Link>
+            </button>
+          </div>
+        ) : (
+          <div className="lg:hidden flex-1">
+            <UserInfo />
+          </div>
+        )}
+      </div>
+
+      <div className="flex lg:hidden flex-col justify-center items-center gap-2 pb-2">
+        {/* need help */}
+        <div className="text-primary-teal text-center">
+          Need help? <span className="font-semibold">0020 500</span>
+        </div>
+
+        {/* search-bar */}
+        <div className="">
+          <SearchBar />
         </div>
       </div>
     </div>
