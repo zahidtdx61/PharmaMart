@@ -70,7 +70,38 @@ const getRole = async (req, res) => {
   }
 };
 
+const getProfile = async (req, res) => {
+  try {
+    const { uid } = req.body;
+    const user = await User.findOne({ uid });
+
+    if (!user) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: "User not found",
+        data: {},
+        error: "User not found",
+      });
+    }
+
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "User profile fetched successfully",
+      data: user,
+      error: {},
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "User profile not fetched",
+      data: {},
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   register,
   getRole,
+  getProfile,
 };
