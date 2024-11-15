@@ -83,9 +83,30 @@ const addCategory = async (req, res) => {
   }
 }
 
+const getByCategory = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const medicines = await Medicine.find({ category: id });
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Medicines found",
+      data: medicines,
+      error: {},
+    });
+  }catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Medicines not found",
+      data: {},
+      error: error.message,
+    });
+  }
+}
+
 module.exports = {
   getAll,
   getOne,
   getAllCategory,
-  addCategory
+  addCategory,
+  getByCategory,
 }
