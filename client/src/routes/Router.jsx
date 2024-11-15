@@ -3,6 +3,7 @@ import AddMedicine from "../components/AddMedicine/AddMedicine";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
+import MedicineCategory from "../pages/MedicineCategory";
 import Registration from "../pages/Registration";
 import Shop from "../pages/Shop";
 
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop />,
+      },
+      {
+        path: "/category/:id",
+        element: <MedicineCategory />,
       },
     ],
   },

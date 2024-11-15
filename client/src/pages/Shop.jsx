@@ -21,7 +21,7 @@ const Shop = () => {
 
   if (isLoading || medicineLoading) return <Loader />;
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="max-w-screen-xl mx-auto p-4">
