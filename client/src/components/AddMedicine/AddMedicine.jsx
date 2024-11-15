@@ -67,7 +67,7 @@ const AddMedicine = () => {
     );
 
   return (
-    <div className="w-full mx-auto">
+    <div className="w-full mx-auto mt-4">
       <div className="w-fit mx-auto px-2 tracking-tight border-primary-green  text-center font-mulish font-semibold text-2xl text-primary-teal border-b-2">
         Add Your Medicine
       </div>

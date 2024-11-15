@@ -20,6 +20,10 @@ const Sidebar = () => {
       path: "/dashboard",
     },
     {
+      name: "Add Medicine",
+      path: "/dashboard/add-medicine",
+    },
+    {
       name: "Manage Medicines",
       path: "/dashboard/manage-medicines",
     },

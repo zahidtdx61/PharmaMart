@@ -24,10 +24,6 @@ const router = createBrowserRouter([
         element: <Registration />,
       },
       {
-        path: "/add",
-        element: <AddMedicine />,
-      },
-      {
         path: "/shop",
         element: <Shop />,
       },
@@ -49,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "manage-medicines",
         element: <ManageMedicines />,
+      },
+      {
+        path: "add-medicine",
+        element: <AddMedicine />,
       },
       {
         path: "payment-history",
