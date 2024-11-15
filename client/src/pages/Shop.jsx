@@ -35,8 +35,8 @@ const Shop = () => {
         </h2>
       </div>
 
-      <div className="max-w-screen-xl mx-auto overflow-scroll ">
-        <table className="divide-y divide-gray-200 mt-6 text-lg">
+      <div className="max-w-screen-xl mx-auto overflow-x-scroll lg:overflow-auto">
+        <table className="divide-y divide-gray-200 mt-6 text-lg mx-auto">
           <thead
             className={`${mode === "light" ? "bg-gray-50" : "bg-sky-950"}`}
           >
@@ -75,7 +75,7 @@ const Shop = () => {
           </thead>
           <tbody className="divide-y divide-gray-200">
             {data.map((medicine) => (
-              <ShopTableData key={medicine.id} medicine={medicine} />
+              <ShopTableData key={medicine._id} medicine={medicine} />
             ))}
           </tbody>
         </table>

@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { BiCart } from "react-icons/bi";
 import { BsEye } from "react-icons/bs";
+import DetailsModal from "./DetailsModal";
 
 const ShopTableData = ({ medicine }) => {
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  
   return (
     <tr>
       <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
@@ -22,9 +26,18 @@ const ShopTableData = ({ medicine }) => {
         <button className="text-primary-green hover:opacity-50 mr-4">
           <BiCart size={30} />
         </button>
-        <button className="text-primary-green hover:opacity-50">
+        <button
+          className="text-primary-green hover:opacity-50"
+          onClick={() => setDetailsOpen(true)}
+        >
           <BsEye size={30} />
         </button>
+          <DetailsModal
+            key={medicine._id}
+            open={detailsOpen}
+            setOpen={setDetailsOpen}
+            medicine={medicine}
+          />
       </td>
     </tr>
   );
