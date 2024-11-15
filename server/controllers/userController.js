@@ -1,5 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const User = require("../models/user");
+const Medicine = require("../models/medicine");
 
 const register = async (req, res) => {
   const user = req.body;
@@ -74,6 +75,9 @@ const getProfile = async (req, res) => {
   try {
     const { uid } = req.body;
     const user = await User.findOne({ uid });
+    const medicines = await Medicine.find({ vendor_id: user._id });
+
+    console.log(medicines);
 
     if (!user) {
       return res.status(StatusCodes.NOT_FOUND).json({
@@ -84,10 +88,16 @@ const getProfile = async (req, res) => {
       });
     }
 
+    const userData = {
+      ...user._doc,
+      medicines,
+    };
+
+    // console.log(userData);
     return res.status(StatusCodes.OK).json({
       success: true,
       message: "User profile fetched successfully",
-      data: user,
+      data: userData,
       error: {},
     });
   } catch (error) {
