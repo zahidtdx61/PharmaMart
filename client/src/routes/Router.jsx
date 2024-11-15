@@ -8,6 +8,7 @@ import ManageMedicines from "../pages/ManageMedicines";
 import MedicineCategory from "../pages/MedicineCategory";
 import Registration from "../pages/Registration";
 import Shop from "../pages/Shop";
+import MyProfile from "../pages/MyProfile/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1>Dashboard Home</h1>,
+        element: <MyProfile />,
       },
       {
         path: "manage-medicines",

@@ -26,7 +26,7 @@ const MedicineCategory = () => {
   console.log({ id, medicines });
   return <div>
     <div className="max-w-screen-xl mx-auto overflow-x-scroll lg:overflow-auto">
-        <table className="divide-y divide-gray-200 mt-6 text-lg mx-auto">
+        <table className="divide-y w-full divide-gray-200 mt-6 text-lg mx-auto">
           <thead
             className={`${mode === "light" ? "bg-gray-50" : "bg-sky-950"}`}
           >
