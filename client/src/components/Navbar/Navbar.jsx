@@ -45,17 +45,18 @@ const Navbar = () => {
       <div className="mb-4 flex items-center justify-between gap-24">
         {/* logo part */}
         <div className="ml-2 flex items-center gap-2">
-          <div className="size-10">
-            <img
-              src={logo}
-              alt="logo"
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
-
-          <div className="text-4xl font-semibold text-primary-teal">
-            Pharma<span className="text-sec-mint-green">Mart</span>
-          </div>
+          <Link to="/" className="flex items-center gap-2">
+            <div className="size-10">
+              <img
+                src={logo}
+                alt="logo"
+                className="h-full w-full object-cover object-center"
+              />
+            </div>
+            <div className="text-4xl font-semibold text-primary-teal">
+              Pharma<span className="text-sec-mint-green">Mart</span>
+            </div>
+          </Link>
         </div>
 
         <div className="flex justify-end items-center gap-8  flex-1 w-full lg:w-[70%]">

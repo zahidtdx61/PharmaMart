@@ -11,7 +11,7 @@ const CategorySection = () => {
     queryFn: async () => {
       const response = await session.get("/medicine/category");
       const data = response.data;
-      console.log(data.data);
+      // console.log(data.data);
       return data.data;
     },
   });
