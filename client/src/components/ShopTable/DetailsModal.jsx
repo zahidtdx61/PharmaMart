@@ -13,7 +13,7 @@ const DetailsModal = ({ open, setOpen, medicine }) => {
           <img
             src={medicine.image}
             alt={medicine.name}
-            className="h-full w-full"
+            className="h-full w-full object-contain object-center"
           />
         </div>
         <div>

@@ -44,7 +44,7 @@ const Navbar = () => {
     >
       <div className="mb-4 flex items-center justify-between gap-24">
         {/* logo part */}
-        <div className="flex items-center gap-2">
+        <div className="ml-2 flex items-center gap-2">
           <div className="size-10">
             <img
               src={logo}
@@ -91,7 +91,7 @@ const Navbar = () => {
           {/* theme switcher */}
           <div
             onClick={changeTheme}
-            className="w-[10%] flex items-center justify-end text-primary-teal"
+            className="w-[10%] flex items-center justify-end text-primary-teal mr-2"
           >
             {mode === "light" ? (
               <button>

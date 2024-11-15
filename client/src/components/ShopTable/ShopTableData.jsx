@@ -8,21 +8,21 @@ const ShopTableData = ({ medicine }) => {
   
   return (
     <tr>
-      <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
+      <td className="px-6 py-4 whitespace-nowrap text-xs lg:text-base font-medium">
         {medicine.name}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm">
+      <td className="px-6 py-4 whitespace-nowrap text-xs lg:text-sm">
         <img
           src={medicine.image}
           alt={medicine.name}
           className="w-20 h-20 object-cover"
         />
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm">
+      <td className="px-6 py-4 whitespace-nowrap text-xs lg:text-sm">
         {medicine.company}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm">{medicine.type}</td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+      <td className="px-6 py-4 whitespace-nowrap text-xs lg:text-sm">{medicine.type}</td>
+      <td className="px-6 py-4 whitespace-nowrap text-xs lg:text-sm font-medium">
         <button className="text-primary-green hover:opacity-50 mr-4">
           <BiCart size={30} />
         </button>
