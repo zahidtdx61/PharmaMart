@@ -36,10 +36,21 @@ export const clearFromLocalStorage = () => {
 
 export const saveToLocalStorage = (key, value) => {
   let data = localStorage.getItem(key);
+  value.addedQuantity = 1;
 
   if (data) {
     data = JSON.parse(data);
-    addToLocalStorage(key, JSON.stringify([...data, value]));
+    if (data.find((item) => item._id === value._id)) {
+      data = data.map((item) => {
+        if (item._id === value._id) {
+          item.addedQuantity += 1;
+        }
+        return item;
+      });
+      addToLocalStorage(key, JSON.stringify(data));
+    } else {
+      addToLocalStorage(key, JSON.stringify([...data, value]));
+    }
   } else {
     addToLocalStorage(key, JSON.stringify([value]));
   }
@@ -49,13 +60,44 @@ export const addToWishlist = (user_id, property) => {
   saveToLocalStorage(user_id, property);
 };
 
-export const deleteFromWishlist = (user_id, property) => {
+export const decreaseOneFromCart = (user_id, id) => {
   let data = localStorage.getItem(user_id);
   if (!data) return null;
   data = JSON.parse(data);
-  const newData = data.filter(
-    (item) => parseInt(item._id) !== parseInt(property._id)
-  );
+  let newData = data.map((item) => {
+    if (item._id === id) {
+      item.addedQuantity -= 1;
+    }
+    return item;
+  });
+  newData = newData.filter((item) => item.addedQuantity > 0);
+  addToLocalStorage(user_id, JSON.stringify(newData));
+};
+
+export const increaseOneFromCart = (user_id, id) => {
+  let data = localStorage.getItem(user_id);
+  if (!data) return null;
+  data = JSON.parse(data);
+  let failed = false;
+  let newData = data.map((item) => {
+    if (item._id === id) {
+      if (item.addedQuantity >= item.quantity) {
+        item.addedQuantity += 0;
+        failed = true;
+      }
+      item.addedQuantity += 1;
+    }
+    return item;
+  });
+  if(failed) return "failed";
+  addToLocalStorage(user_id, JSON.stringify(newData));
+};
+
+export const deleteFromWishlist = (user_id, id) => {
+  let data = localStorage.getItem(user_id);
+  if (!data) return null;
+  data = JSON.parse(data);
+  const newData = data.filter((item) => item._id !== id);
   addToLocalStorage(user_id, JSON.stringify(newData));
 };
 

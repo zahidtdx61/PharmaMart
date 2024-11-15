@@ -1,16 +1,16 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { BiCart } from "react-icons/bi";
 import { BsEye } from "react-icons/bs";
 import useAuth from "../../hooks/useAuth";
-import DetailsModal from "./DetailsModal";
 import { saveToLocalStorage } from "../../utils";
-import toast from "react-hot-toast";
+import DetailsModal from "./DetailsModal";
 
 const ShopTableData = ({ medicine }) => {
   const [detailsOpen, setDetailsOpen] = useState(false);
   const { user } = useAuth();
   const { uid } = user || {};
-  console.log({ uid });
+  // console.log({ uid });
 
   const addItemToCart = (item) => {
     const user_id = uid || "unregistered";
@@ -24,11 +24,16 @@ const ShopTableData = ({ medicine }) => {
         {medicine.name}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-xs lg:text-sm">
-        <img
-          src={medicine.image}
-          alt={medicine.name}
-          className="w-20 h-20 object-cover"
-        />
+        <div className="size-24 flex justify-center items-center mx-auto">
+          <img
+            src={medicine.image}
+            alt={medicine.name}
+            className="w-full h-full object-cover object-center mx-auto"
+          />
+        </div>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-center text-xs lg:text-sm">
+        {medicine.quantity}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-xs lg:text-sm">
         {medicine.company}

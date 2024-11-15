@@ -49,9 +49,15 @@ const Shop = () => {
               </th>
               <th
                 scope="col"
-                className="px-6 py-3 text-left  font-medium uppercase tracking-wider"
+                className="px-6 py-3 text-center  font-medium uppercase tracking-wider"
               >
                 Image
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-center  font-medium uppercase tracking-wider"
+              >
+                Quantity
               </th>
               <th
                 scope="col"

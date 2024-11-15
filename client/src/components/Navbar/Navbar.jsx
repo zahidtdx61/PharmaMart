@@ -39,14 +39,14 @@ const Navbar = () => {
     <div
       className={
         mode === "light"
-          ? "bg-white shadow-md mt-4"
-          : "bg-slate-900 shadow-md mt-4"
+          ? "bg-white shadow-md"
+          : "bg-slate-900 shadow-md"
       }
     >
-      <div className="mb-4 flex items-center justify-between gap-24">
+      <div className="mb-4 pt-1 flex items-center justify-between">
         {/* logo part */}
-        <div className="ml-2 flex items-center gap-2">
-          <Link to="/" className="flex items-center gap-2">
+        <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2 p-2">
             <div className="size-10">
               <img
                 src={logo}
@@ -60,7 +60,8 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="flex justify-end items-center gap-8  flex-1 w-full lg:w-[70%]">
+        {/* icons */}
+        <div className="hidden lg:flex justify-end items-center gap-8  flex-1 w-full lg:w-[70%]">
           {/* need help */}
           <div className="text-primary-teal w-[15%] text-center hidden lg:flex gap-1">
             Need help? <span className="font-semibold">0020 500</span>
@@ -90,10 +91,10 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* theme switcher */}
+          {/* theme switcher large device */}
           <div
             onClick={changeTheme}
-            className="w-[10%] flex items-center justify-end text-primary-teal mr-2"
+            className="w-[10%] flex  items-center justify-end text-primary-teal pr-2"
           >
             {mode === "light" ? (
               <button>
@@ -106,6 +107,22 @@ const Navbar = () => {
             )}
           </div>
         </div>
+
+        {/* theme switcher mobile device */}
+        <div
+            onClick={changeTheme}
+            className="flex-1  static lg:hidden flex items-center justify-end text-primary-teal pr-1"
+          >
+            {mode === "light" ? (
+              <button className="w-fit">
+                <CiLight size={30} />
+              </button>
+            ) : (
+              <button className="w-fit">
+                <IoMoonOutline size={30} />
+              </button>
+            )}
+          </div>
       </div>
 
       <Divider />

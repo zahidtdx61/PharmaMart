@@ -2,13 +2,14 @@ import { createBrowserRouter } from "react-router-dom";
 import AddMedicine from "../components/AddMedicine/AddMedicine";
 import Dashboard from "../layouts/Dashboard/Dashboard";
 import MainLayout from "../layouts/MainLayout/MainLayout";
+import Cart from "../pages/Cart";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
 import ManageMedicines from "../pages/ManageMedicines";
 import MedicineCategory from "../pages/MedicineCategory";
+import MyProfile from "../pages/MyProfile";
 import Registration from "../pages/Registration";
 import Shop from "../pages/Shop";
-import MyProfile from "../pages/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -34,8 +35,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        
-      }
+        element: <Cart />,
+      },
     ],
   },
   {
