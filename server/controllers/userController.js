@@ -48,6 +48,29 @@ const register = async (req, res) => {
   }
 };
 
+const getRole = async (req, res) => {
+  try {
+    const { uid } = req.body;
+    const user = await User.findOne({ uid });
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "User role fetched successfully",
+      data: {
+        role: user?.role,
+      },
+      error: {},
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "User role not fetched",
+      data: {},
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   register,
+  getRole,
 };
