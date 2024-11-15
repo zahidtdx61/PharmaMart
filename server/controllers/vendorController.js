@@ -5,7 +5,6 @@ const Category = require("../models/category");
 
 const addMedicine = async (req, res) => {
   const medicine = req.body;
-  console.log(medicine);
   const { expiryDate, manufactureDate } = medicine;
 
   if (manufactureDate) {
@@ -16,7 +15,6 @@ const addMedicine = async (req, res) => {
   }
   try {
     const vendor = await User.findOne({ uid: medicine.vendorId });
-    console.log(vendor);
     if (!vendor) {
       return res.status(StatusCodes.NOT_FOUND).json({
         success: false,
@@ -27,7 +25,6 @@ const addMedicine = async (req, res) => {
     }
 
     const categoryData = await Category.findOne({ _id: medicine.categoryId });
-    console.log(categoryData);
     if (!categoryData) {
       return res.status(StatusCodes.NOT_FOUND).json({
         success: false,
@@ -59,6 +56,30 @@ const addMedicine = async (req, res) => {
   }
 };
 
+const getAllMedicine = async (req, res) => {
+  try {
+    const { uid } = req.body;
+    const vendor = await User.findOne({ uid });
+    const medicines = await Medicine.find({ vendor_id: vendor._id })
+      .populate("vendor_id")
+      .populate("category");
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "All medicines",
+      data: medicines,
+      error: {},
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Medicines not found",
+      data: {},
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   addMedicine,
+  getAllMedicine,
 };
