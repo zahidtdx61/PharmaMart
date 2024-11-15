@@ -1,4 +1,11 @@
-import { Divider, useColorScheme } from "@mui/joy";
+import {
+  Divider,
+  Dropdown,
+  Menu,
+  MenuButton,
+  MenuItem,
+  useColorScheme,
+} from "@mui/joy";
 import { CgHeart, CgProfile, CgShoppingCart } from "react-icons/cg";
 import { CiLight } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -30,10 +37,12 @@ const Navbar = () => {
   return (
     <div
       className={
-        mode === "light" ? "bg-white shadow-md" : "bg-slate-900 shadow-md"
+        mode === "light"
+          ? "bg-white shadow-md mt-4 px-2"
+          : "bg-slate-900 shadow-md mt-4 px-2"
       }
     >
-      <div className="p-4 mb-4 flex items-center justify-between gap-24">
+      <div className="mb-4 flex items-center justify-between gap-24">
         {/* logo part */}
         <div className="flex items-center gap-2">
           <div className="size-10">
@@ -51,17 +60,17 @@ const Navbar = () => {
 
         <div className="flex justify-end items-center gap-8  flex-1 w-full lg:w-[70%]">
           {/* need help */}
-          <div className="text-primary-teal w-[20%] text-center">
+          <div className="text-primary-teal w-[15%] text-center hidden lg:flex">
             Need help? <span className="font-semibold">0020 500</span>
           </div>
 
           {/* search-bar */}
-          <div className="w-[40%]">
+          <div className="w-[37%] hidden lg:flex">
             <SearchBar />
           </div>
 
           {/* icons */}
-          <div className="w-[20%] flex items-center justify-end gap-4 text-primary-teal">
+          <div className="w-[18%] hidden lg:flex items-center justify-end gap-4 text-primary-teal">
             <button>
               <CgHeart size={35} />
             </button>
@@ -100,10 +109,22 @@ const Navbar = () => {
       <Divider />
 
       <div className="px-4 my-4 pb-4 flex items-center gap-6 text-lg text-primary-teal">
-        <button>
-          <GiHamburgerMenu size={30} />
-        </button>
-        <>
+        <Dropdown>
+          <MenuButton>
+            <GiHamburgerMenu color="#00A19D" size={30} />
+          </MenuButton>
+          <Menu>
+            {routes.map((route, index) => {
+              return (
+                <MenuItem key={index}>
+                  <NavLink to={route.path}>{route.name}</NavLink>
+                </MenuItem>
+              );
+            })}
+          </Menu>
+        </Dropdown>
+
+        <div className="hidden lg:flex gap-3">
           {routes.map((route, index) => {
             return (
               <NavLink key={index} to={route.path}>
@@ -111,7 +132,7 @@ const Navbar = () => {
               </NavLink>
             );
           })}
-        </>
+        </div>
       </div>
     </div>
   );
