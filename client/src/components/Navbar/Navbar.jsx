@@ -10,7 +10,7 @@ import { CgHeart, CgProfile, CgShoppingCart } from "react-icons/cg";
 import { CiLight } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMoonOutline } from "react-icons/io5";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import UserInfo from "../UserInfo/UserInfo";
 import SearchBar from "./SearchBar";
@@ -19,6 +19,7 @@ import logo from "/pharma-logo.png";
 const Navbar = () => {
   const { mode, setMode } = useColorScheme();
   const { user, isLoading } = useAuth();
+  const navigate = useNavigate();
 
   const changeTheme = () => {
     setMode(mode === "light" ? "dark" : "light");
@@ -27,7 +28,7 @@ const Navbar = () => {
   const routes = [
     { name: "Home", path: "/" },
     { name: "Shop", path: "/shop" },
-    { name: "Cart Items", path: "cart-items" },
+    { name: "Cart Items", path: "cart" },
     { name: "Contact Us", path: "/contact" },
     { name: "About Us", path: "/about" },
   ];
@@ -75,7 +76,7 @@ const Navbar = () => {
             <button>
               <CgHeart size={35} />
             </button>
-            <button>
+            <button onClick={() => navigate("/cart")}>
               <CgShoppingCart size={35} />
             </button>
             <button>

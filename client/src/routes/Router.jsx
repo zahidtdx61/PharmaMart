@@ -8,7 +8,7 @@ import ManageMedicines from "../pages/ManageMedicines";
 import MedicineCategory from "../pages/MedicineCategory";
 import Registration from "../pages/Registration";
 import Shop from "../pages/Shop";
-import MyProfile from "../pages/MyProfile/MyProfile";
+import MyProfile from "../pages/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +32,10 @@ const router = createBrowserRouter([
         path: "/category/:id",
         element: <MedicineCategory />,
       },
+      {
+        path: "/cart",
+        
+      }
     ],
   },
   {

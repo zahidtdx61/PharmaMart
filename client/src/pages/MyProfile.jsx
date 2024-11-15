@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import LoadContent from "../../components/Loader/LoadContent";
-import useAuth from "../../hooks/useAuth";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import LoadContent from "../components/Loader/LoadContent";
+import useAuth from "../hooks/useAuth";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const MyProfile = () => {
   const session = useAxiosSecure();
@@ -65,16 +65,16 @@ const MyProfile = () => {
                 {userData?.medicines.map((medicine) => (
                   <div
                     key={medicine._id}
-                    className="flex gap-2 p-2 border-[1px] border-primary-green rounded-lg"
+                    className="flex gap-8 p-2 border-[1px] border-primary-green rounded-lg"
                   >
-                    <div className="size-32">
+                    <div className="flex items-center size-32">
                       <img
                         src={medicine.image}
                         alt={medicine.name}
                         className="object-center"
                       />
                     </div>
-                    <div className="text-left text-base">
+                    <div className="text-left text-sm lg:text-base">
                       <h3> Medicine Name: {medicine.name}</h3>
                       <h3>Price Per Unit (BDT): {medicine.pricePerUnit}</h3>
                       <h3>Stock: {medicine.quantity}</h3>
