@@ -40,7 +40,7 @@ const SignIn = ({ tabIndex }) => {
     try {
       const result = await signInEmail(email, password);
       navigate(prevPage);
-      toast.success("Welcome to Buzz Forums !!!");
+      toast.success("Welcome to PharmaMart !!!");
       addUserToDatabase(result.user);
     } catch (error) {
       setIsLoading(false);
@@ -55,7 +55,7 @@ const SignIn = ({ tabIndex }) => {
       const user = result.user;
       setUser(user);
       navigate(prevPage);
-      toast.success("Welcome to Buzz Forums !!!");
+      toast.success("Welcome to PharmaMart !!!");
       addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
@@ -70,7 +70,7 @@ const SignIn = ({ tabIndex }) => {
       const user = result.user;
       setUser(user);
       navigate(prevPage);
-      toast.success("Welcome to Buzz Forums !!!");
+      toast.success("Welcome to PharmaMart !!!");
       addUserToDatabase(user);
     } catch (error) {
       // console.log(error.code);
@@ -91,7 +91,7 @@ const SignIn = ({ tabIndex }) => {
         <div className="max-w-sm w-full text-gray-600 space-y-5">
           <div className="text-center pb-8">
             <div className="mt-5">
-              <h3 className="text-primary-teal text-2xl font-bold sm:text-3xl">
+              <h3 className="text-primary-teal font-bold sm:text-3xl">
                 Sign in to your account
               </h3>
             </div>

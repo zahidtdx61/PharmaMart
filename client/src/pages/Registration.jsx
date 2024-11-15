@@ -37,7 +37,7 @@ const Registration = () => {
       <div className="flex flex-col items-center justify-center w-full max-w-2xl px-10 mx-auto mb-6 transition duration-500 ease-in-out transform rounded-lg md:mt-0">
         <Link
           to={"/"}
-          className="text text-center  font-mulish text-primary-teal font-bold sm:text-3xl"
+          className="text-center  font-mulish text-primary-teal font-bold text-3xl mt-2"
         >
           Join our trusted community of healthcare providers, pharmacies, and
           customers.
