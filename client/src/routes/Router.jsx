@@ -4,6 +4,7 @@ import Dashboard from "../layouts/Dashboard/Dashboard";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
+import ManageMedicines from "../pages/ManageMedicines";
 import MedicineCategory from "../pages/MedicineCategory";
 import Registration from "../pages/Registration";
 import Shop from "../pages/Shop";
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
       },
       {
         path: "manage-medicines",
-        element: <h1>Manage Medicines</h1>,
+        element: <ManageMedicines />,
       },
       {
         path: "payment-history",
@@ -56,13 +57,13 @@ const router = createBrowserRouter([
       {
         path: "advertisements",
         element: <h1>Advertisements</h1>,
-      }
+      },
     ],
   },
   {
     path: "*",
     element: <ErrorPage />,
-  }
+  },
 ]);
 
 export default router;

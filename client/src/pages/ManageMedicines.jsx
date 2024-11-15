@@ -1,37 +1,33 @@
 import { useColorScheme } from "@mui/joy";
 import { useQuery } from "@tanstack/react-query";
-import Loader from "../components/Loader/Loader";
-import ShopTableData from "../components/ShopTable/ShopTableData";
-import useAuth from "../hooks/useAuth";
+import LoadContent from "../components/Loader/LoadContent";
+import ManageMedicineTable from "../components/ManageMedicineTable/ManageMedicineTable";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
-const Shop = () => {
+const ManageMedicines = () => {
   const session = useAxiosSecure();
-  const { isLoading } = useAuth();
   const { mode } = useColorScheme();
 
-  const { data, isLoading: medicineLoading } = useQuery({
-    queryKey: ["medicine"],
+  const { data: medicines, isLoading } = useQuery({
+    queryKey: ["medicines"],
     queryFn: async () => {
-      const response = await session.get("/medicine/get-all");
-      const data = response.data;
-      return data.data;
+      const response = await session.get("/vendor/all-medicine");
+      console.log(response.data.data);
+      return response.data.data;
     },
   });
 
-  if (isLoading || medicineLoading) return <Loader />;
-
-  // console.log(data);
+  if (isLoading) return <LoadContent />;
 
   return (
-    <div className="max-w-screen-xl mx-auto p-4">
+    <div className="p-4">
       <div>
-        <h1 className="text-3xl font-semibold text-primary-teal text-center border-b-2 w-fit mx-auto px-2 py-2 border-primary-green">
-          Shop
+        <h1 className="text-4xl font-semibold text-primary-teal text-center border-b-2 w-fit mx-auto px-2 py-2 border-primary-green">
+          Manage Your Medicines
         </h1>
         <h2 className="font-fira-sans text-center text-primary-teal mt-4">
-          List of our all medicines. Choose your medicines according to your
-          need.
+          List of all medicines added by you. You can edit or delete any
+          medicine from here.
         </h2>
       </div>
 
@@ -55,15 +51,15 @@ const Shop = () => {
               </th>
               <th
                 scope="col"
-                className="px-6 py-3 text-left  font-medium uppercase tracking-wider"
+                className="px-6 py-3 text-left  font-medium uppercase tracking-wider text-center"
               >
-                Company
+                Price Per Unit (BDT)
               </th>
               <th
                 scope="col"
                 className="px-6 py-3 text-left  font-medium uppercase tracking-wider"
               >
-                Type
+                Stock
               </th>
               <th
                 scope="col"
@@ -74,8 +70,8 @@ const Shop = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {data.map((medicine) => (
-              <ShopTableData key={medicine._id} medicine={medicine} />
+            {medicines.map((medicine) => (
+              <ManageMedicineTable key={medicine._id} medicine={medicine} />
             ))}
           </tbody>
         </table>
@@ -84,4 +80,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default ManageMedicines;

@@ -27,12 +27,16 @@ const DetailsModal = ({ open, setOpen, medicine }) => {
             Description: {medicine.description}
           </Typography>
           <Typography variant="h6" color="secondary" className="font-semibold">
-            Per Unit Price: {medicine.pricePerUnit}{" "}
+            Per Unit Price (BDT): {medicine.pricePerUnit}{" "}
           </Typography>
           <Typography variant="h6" color="secondary" className="font-semibold">
             Stock: {medicine.status}{" "}
           </Typography>
-          <Typography variant="h6" color="secondary" className="font-semibold capitalize">
+          <Typography
+            variant="h6"
+            color="secondary"
+            className="font-semibold capitalize"
+          >
             Quantity: {medicine.quantity}{" "}
           </Typography>
         </div>

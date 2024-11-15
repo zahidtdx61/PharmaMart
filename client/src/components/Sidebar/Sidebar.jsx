@@ -47,16 +47,20 @@ const Sidebar = () => {
     return [
       isActive ? "text-red-600" : "text-primary-green",
       isActive
-        ? `border-blue-300 px-2 font-semibold ${mode=== 'light' ? 'bg-gray-200' : 'bg-gray-700'}`
+        ? `border-blue-300 px-2 font-semibold ${
+            mode === "light" ? "bg-gray-200" : "bg-gray-700"
+          }`
         : "font-medium px-2",
-      `py-1 px-8 ${mode=== 'light' ? ' hover:bg-gray-200' : ' hover:bg-gray-700'} cursor-pointer`,
+      `py-1 px-8 ${
+        mode === "light" ? " hover:bg-gray-200" : " hover:bg-gray-700"
+      } cursor-pointer`,
     ].join(" ");
   };
 
   const handleSignOut = async () => {
     try {
       setIsLoading(true);
-      await axiosSecure.get("/user/logout");
+      // await axiosSecure.get("/user/logout");
       await logOut();
       console.log("Sign out successful");
       navigate("/");
@@ -93,10 +97,7 @@ const Sidebar = () => {
         </div>
 
         {/* theme switcher */}
-        <div
-          onClick={changeTheme}
-          className="mx-auto  text-primary-teal mt-4"
-        >
+        <div onClick={changeTheme} className="mx-auto  text-primary-teal mt-4">
           {mode === "light" ? (
             <button className="px-3 py-1 mx-auto border-2 rounded-md border-primary-teal hover:opacity-70">
               Enable Dark Mode
@@ -143,14 +144,39 @@ const Sidebar = () => {
         <AccordionGroup disableDivider sx={{ width: "100%" }}>
           <Accordion>
             <AccordionSummary indicator={<MdMenuOpen size={30} />}>
-              <div className="p-2 text-center">
-                <Link to={"/"} className="text-4xl font-bold">
-                  Buzz Forums
+              <div className="ml-2 flex items-center gap-2">
+                <Link to="/" className="flex items-center mt-2 gap-2">
+                  <div className="size-10">
+                    <img
+                      src={logo}
+                      alt="logo"
+                      className="h-full w-full object-cover object-center"
+                    />
+                  </div>
+                  <div className="text-4xl font-semibold text-primary-teal">
+                    Pharma<span className="text-sec-mint-green">Mart</span>
+                  </div>
                 </Link>
               </div>
             </AccordionSummary>
             <AccordionDetails>
-              <div className="font-mulish font-medium flex flex-col flex-1">
+              {/* theme switcher */}
+              <div
+                onClick={changeTheme}
+                className="mx-auto  text-primary-teal mt-4"
+              >
+                {mode === "light" ? (
+                  <button className="px-3 py-1 mx-auto border-2 rounded-md border-primary-teal hover:opacity-70">
+                    Enable Dark Mode
+                  </button>
+                ) : (
+                  <button className="px-3 py-1 mx-auto border-2 rounded-md border-primary-teal hover:opacity-70">
+                    Enable Light Mode
+                  </button>
+                )}
+              </div>
+
+              <div className="font-mulish font-medium flex flex-col flex-1 mt-4">
                 {routes.map((route) => (
                   <NavLink
                     key={route.path}
