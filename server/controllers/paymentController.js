@@ -28,14 +28,7 @@ const createCheckoutSession = async (req, res) => {
 };
 
 const completePayment = async (req, res) => {
-  const { medicine_id, vendor_id, buyer_id, totalAmount, transaction_id } =
-    req.body;
-  const medicineObjectIds = medicine_id.map((id) =>
-    Mongoose.Types.ObjectId(id)
-  );
-
-  const vendorId = Mongoose.Types.ObjectId(vendor_id);
-  const buyerId = Mongoose.Types.ObjectId(buyer_id);
+  const { medicines, buyer_id, totalAmount, transaction_id, uid } = req.body;
 
   try {
     const user = await User.findOne({ uid });
@@ -50,9 +43,8 @@ const completePayment = async (req, res) => {
 
     const payment = await Payment.create({
       transaction_id,
-      medicine_id: medicineObjectIds,
-      vendor_id: vendorId,
-      buyer_id: buyerId,
+      medicines,
+      buyer_id: user._id,
       totalAmount,
     });
 
