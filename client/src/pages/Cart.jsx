@@ -24,7 +24,7 @@ const Cart = () => {
     setCartData(data);
     let total = 0;
     data?.forEach((item) => {
-      total += parseInt(item.pricePerUnit) * parseInt(item.addedQuantity);
+      total += parseFloat(item.pricePerUnit) * parseFloat(item.addedQuantity);
     });
     setTotalPrice(total);
   }, [uid]);
@@ -38,7 +38,7 @@ const Cart = () => {
     setCartData(data);
     let total = 0;
     data?.forEach((item) => {
-      total += parseInt(item.pricePerUnit) * parseInt(item.addedQuantity);
+      total += parseFloat(item.pricePerUnit) * parseFloat(item.addedQuantity);
     });
     setTotalPrice(total);
     toast.success("Item removed from cart");
@@ -55,10 +55,10 @@ const Cart = () => {
     setCartData(data);
     let total = 0;
     data?.forEach((item) => {
-      total += parseInt(item.pricePerUnit) * parseInt(item.addedQuantity);
+      total += parseFloat(item.pricePerUnit) * parseFloat(item.addedQuantity);
     });
     setTotalPrice(total);
-    toast.success("Item added to cart");
+    toast.success("Item count increased");
   };
 
   const removeOne = (id) => {
@@ -68,10 +68,10 @@ const Cart = () => {
     setCartData(data);
     let total = 0;
     data?.forEach((item) => {
-      total += parseInt(item.pricePerUnit) * parseInt(item.addedQuantity);
+      total += parseFloat(item.pricePerUnit) * parseFloat(item.addedQuantity);
     });
     setTotalPrice(total);
-    toast.success("Item removed from cart");
+    toast.success("Item count decreased");
   };
 
   return (
@@ -139,8 +139,8 @@ const Cart = () => {
                       <span>{item.addedQuantity}</span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-xs lg:text-base font-medium">
-                      {parseInt(item?.pricePerUnit) *
-                        parseInt(item?.addedQuantity)}
+                      {parseFloat(item?.pricePerUnit) *
+                        parseFloat(item?.addedQuantity)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-xs lg:text-base font-medium">
                       {item.type}
@@ -176,7 +176,7 @@ const Cart = () => {
               <h1 className="text-base font-semibold text-primary-teal">
                 Total Price: {totalPrice} BDT
               </h1>
-              <button className="px-3 py-1 bg-primary-teal text-zinc-100 rounded-md">
+              <button className="px-3 py-1 bg-primary-teal text-zinc-50 font-semibold font-lexend rounded-md">
                 Checkout
               </button>
             </div>

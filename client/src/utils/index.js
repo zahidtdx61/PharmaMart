@@ -89,7 +89,7 @@ export const increaseOneFromCart = (user_id, id) => {
     }
     return item;
   });
-  if(failed) return "failed";
+  if (failed) return "failed";
   addToLocalStorage(user_id, JSON.stringify(newData));
 };
 
@@ -110,3 +110,38 @@ export const imageUpload = async (image) => {
   );
   return data.data.display_url;
 };
+
+export const byteScaleUpload = async (image) => {
+  const baseUrl = "https://api.bytescale.com";
+  const path = `/v2/accounts/${import.meta.env.VITE_Bytescale_accountId}/uploads/form_data`;
+  const entries = (obj) =>
+    Object.entries(obj).filter(([, val]) => (val ?? null) !== null);
+  const query = entries({})
+    .flatMap(([k, v]) => (Array.isArray(v) ? v.map((v2) => [k, v2]) : [[k, v]]))
+    .map((kv) => kv.join("="))
+    .join("&");
+  const formData = new FormData();
+  formData.append("file", image);
+  const response = await fetch(
+    `${baseUrl}${path}${query.length > 0 ? "?" : ""}${query}`,
+    {
+      method: "POST",
+      body: formData,
+      headers: Object.fromEntries(
+        entries({
+          Authorization: `Bearer ${import.meta.env.VITE_Bytescale_apiKey}`,
+          "X-Upload-Metadata": JSON.stringify({}),
+        })
+      ),
+    }
+  );
+  const result = await response.json();
+  if (Math.floor(response.status / 100) !== 2)
+    throw new Error(`Bytescale API Error: ${JSON.stringify(result)}`);
+  const {files} = result;
+  if (!files || files.length !== 1)
+    throw new Error(`Bytescale API Error: ${JSON.stringify(result)}`);
+  const {fileUrl} = files[0];
+  return fileUrl;
+}
+

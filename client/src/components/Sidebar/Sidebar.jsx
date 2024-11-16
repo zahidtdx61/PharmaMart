@@ -114,8 +114,8 @@ const Sidebar = () => {
   const handleSignOut = async () => {
     try {
       setIsLoading(true);
-      await axiosSecure.get("/user/logout");
       await logOut();
+      await axiosSecure.get("/user/logout");
       console.log("Sign out successful");
       navigate("/");
       toast.success("Sign out successful");
@@ -126,7 +126,7 @@ const Sidebar = () => {
     }
   };
 
-  console.log("Sidebar rendered");
+  // console.log("Sidebar rendered");
 
   if (isRoleLoading) return <LoadContent />;
 

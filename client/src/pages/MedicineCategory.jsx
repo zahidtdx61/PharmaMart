@@ -47,6 +47,12 @@ const MedicineCategory = () => {
                 scope="col"
                 className="px-6 py-3 text-center  font-medium uppercase tracking-wider"
               >
+                Price Per Unit
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-center  font-medium uppercase tracking-wider"
+              >
                 Quantity
               </th>
               <th

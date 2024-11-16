@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { imageUpload } from "../../utils";
+import { byteScaleUpload, imageUpload } from "../../utils";
 
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
@@ -51,7 +51,7 @@ const SignUp = () => {
         name: displayName,
         image: photoURL,
       });
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -105,23 +105,25 @@ const SignUp = () => {
       console.log("Before Update", user);
 
       // upload image
-      const photoUrl = await imageUpload(image[0]);
+      const photoUrl = await byteScaleUpload(image[0]);
 
       // update user
       await updateUser(name, photoUrl);
       setUser({ ...user, displayName: name, photoURL: photoUrl });
-      setIsLoading(false);
       console.log("after update", user);
-
+      
       navigate(prevPage);
-      toast.success("Welcome to Buzz Forums !!!");
       addUserToDatabase(user);
+      setIsLoading(false);
+      toast.success("Welcome to PharmaMart !!!");
     } catch (error) {
       // console.error('get error: ', error.code, error.message);
       if (error.code === "auth/email-already-in-use")
         toast.error("Email already in use");
       setIsLoading(false);
       setUser(null);
+    } finally{
+      setIsLoading(false);
     }
   };
 
@@ -131,7 +133,7 @@ const SignUp = () => {
       const user = result.user;
       setUser(user);
       navigate(prevPage);
-      toast.success("Welcome to Buzz Forums !!!");
+      toast.success("Welcome to PharmaMart !!!");
       addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
@@ -146,7 +148,7 @@ const SignUp = () => {
       const user = result.user;
       setUser(user);
       navigate(prevPage);
-      toast.success("Welcome to Buzz Forums !!!");
+      toast.success("Welcome to PharmaMart !!!");
       addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);

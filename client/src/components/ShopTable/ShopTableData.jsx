@@ -33,6 +33,9 @@ const ShopTableData = ({ medicine }) => {
         </div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-center text-xs lg:text-sm">
+        {medicine.pricePerUnit}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-center text-xs lg:text-sm">
         {medicine.quantity}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-xs lg:text-sm">

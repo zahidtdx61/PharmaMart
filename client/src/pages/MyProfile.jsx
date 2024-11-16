@@ -20,7 +20,7 @@ const MyProfile = () => {
 
   if (userLoading || isLoading) return <LoadContent />;
 
-  console.log(userData, user);
+  // console.log(userData, user);
   return (
     <div className="max-w-screen-xl mx-auto p-4">
       <div>
