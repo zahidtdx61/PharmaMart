@@ -1,7 +1,13 @@
 import { Divider, useColorScheme } from "@mui/joy";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
+import CheckoutForm from "../components/CheckoutForm/CheckoutForm";
 import useAuth from "../hooks/useAuth";
 import { getFromLocalStorage } from "../utils";
+import "./Checkout.css";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const Checkout = () => {
   const { user } = useAuth();
@@ -84,6 +90,13 @@ const Checkout = () => {
                 Total Price:{" "}
                 <span className="font-semibold">{totalPrice} BDT</span>
               </h1>
+            </div>
+
+            <div className="mt-10 text-blue-400">
+              <p>Please fill up necessary info in order to complete payment.</p>
+              <Elements stripe={stripePromise}>
+                <CheckoutForm />
+              </Elements>
             </div>
           </>
         ) : (
