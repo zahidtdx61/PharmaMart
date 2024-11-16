@@ -42,7 +42,7 @@ const getOne = async (req, res) => {
       error: error.message,
     });
   }
-}
+};
 
 const getAllCategory = async (req, res) => {
   try {
@@ -61,7 +61,7 @@ const getAllCategory = async (req, res) => {
       error: error.message,
     });
   }
-}
+};
 
 const addCategory = async (req, res) => {
   const category = req.body;
@@ -81,7 +81,7 @@ const addCategory = async (req, res) => {
       error: error.message,
     });
   }
-}
+};
 
 const getByCategory = async (req, res) => {
   const { id } = req.params;
@@ -93,7 +93,7 @@ const getByCategory = async (req, res) => {
       data: medicines,
       error: {},
     });
-  }catch (error) {
+  } catch (error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       success: false,
       message: "Medicines not found",
@@ -101,7 +101,27 @@ const getByCategory = async (req, res) => {
       error: error.message,
     });
   }
-}
+};
+
+const getCategory = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const category = await Category.findById(id);
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Category found",
+      data: category,
+      error: {},
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Category not found",
+      data: {},
+      error: error.message,
+    });
+  }
+};
 
 module.exports = {
   getAll,
@@ -109,4 +129,5 @@ module.exports = {
   getAllCategory,
   addCategory,
   getByCategory,
-}
+  getCategory,
+};
