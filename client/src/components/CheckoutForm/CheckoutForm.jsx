@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { ImSpinner9 } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
-import "./CheckoutForm.css";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { getFromLocalStorage, removeFromLocalStorage } from "../../utils";
+import "./CheckoutForm.css";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -18,11 +19,20 @@ const CheckoutForm = () => {
   const [cardError, setCardError] = useState("");
   const [processing, setProcessing] = useState(false);
 
+  const { uid } = user || {};
+  const [totalAmount, setTotalAmount] = useState(0);
+
   useEffect(() => {
     // fetch client secret
     getClientSecret();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const medicineData = getFromLocalStorage(uid);
+    let total = 0;
+    medicineData?.forEach((item) => {
+      total += parseFloat(item.pricePerUnit) * parseFloat(item.addedQuantity);
+    });
+    setTotalAmount(total);
+  }, [uid]);
 
   //   get clientSecret
   const getClientSecret = async () => {
@@ -88,20 +98,35 @@ const CheckoutForm = () => {
       return;
     }
 
+    const medicineData = getFromLocalStorage(uid);
+    let medicines = [];
+
+    medicineData?.forEach((item) => {
+      const { name, pricePerUnit, addedQuantity } = item;
+      medicines.push({
+        name,
+        price: parseFloat(pricePerUnit),
+        quantity: parseFloat(addedQuantity),
+      });
+    });
+
     if (paymentIntent.status === "succeeded") {
-      console.log("payment---> ", paymentIntent);
+      // console.log("payment---> ", paymentIntent);
       const paymentInfo = {
-        transactionId: paymentIntent.id,
-        uid: user?.uid,
+        transaction_id: paymentIntent.id,
+        buyer_id: user?.uid,
+        totalAmount,
+        medicines,
       };
       console.log(paymentInfo);
 
       try {
-        const { data } = await axiosSecure.post(
+        await axiosSecure.post(
           "/payment/complete-payment",
           paymentInfo
         );
-        console.log(data);
+        // console.log(response.data);
+        removeFromLocalStorage(uid);
 
         toast.success("Payment Successfully");
         navigate("/dashboard");
@@ -147,7 +172,7 @@ const CheckoutForm = () => {
               {processing ? (
                 <ImSpinner9 className="animate-spin m-auto" size={24} />
               ) : (
-                `Pay ${400}`
+                `Pay ${totalAmount} BDT`
               )}
             </button>
             <button
