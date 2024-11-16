@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import AddMedicine from "../components/AddMedicine/AddMedicine";
 import Dashboard from "../layouts/Dashboard/Dashboard";
 import MainLayout from "../layouts/MainLayout/MainLayout";
+import AddCategory from "../pages/AddCategory";
 import Cart from "../pages/Cart";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
@@ -12,7 +13,7 @@ import MedicineCategory from "../pages/MedicineCategory";
 import MyProfile from "../pages/MyProfile";
 import Registration from "../pages/Registration";
 import Shop from "../pages/Shop";
-import AddCategory from "../pages/AddCategory";
+import UpdateCategory from "../pages/UpdateCategory";
 
 const router = createBrowserRouter([
   {
@@ -77,12 +78,12 @@ const router = createBrowserRouter([
       },
       {
         path: "edit-category/:id",
-        element: <AddCategory/>,
+        element: <UpdateCategory />,
       },
       {
         path: "add-new-category",
-        element: <AddCategory/>,
-      }
+        element: <AddCategory />,
+      },
     ],
   },
   {
