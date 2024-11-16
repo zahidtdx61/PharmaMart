@@ -11,10 +11,12 @@ import { MdMenuOpen } from "react-icons/md";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useRole from "../../hooks/useRole";
+import LoadContent from "../Loader/LoadContent";
 import logo from "/pharma-logo.png";
 
 const Sidebar = () => {
-  const routes = [
+  const vendorRoutes = [
     {
       name: "My Profile",
       path: "/dashboard",
@@ -36,6 +38,54 @@ const Sidebar = () => {
       path: "/dashboard/advertisements",
     },
   ];
+
+  const adminRoutes = [
+    {
+      name: "Admin Profile",
+      path: "/dashboard",
+    },
+    {
+      name: "Manage Users",
+      path: "/dashboard/manage-users",
+    },
+    {
+      name: "Manage Categories",
+      path: "/dashboard/manage-categories",
+    },
+    {
+      name: "Payment Management",
+      path: "/dashboard/payment-management",
+    },
+    {
+      name: "Sales Report",
+      path: "/dashboard/sales-report",
+    },
+    {
+      name: "Manage Advertisements",
+      path: "/dashboard/manage-advertisements",
+    },
+  ];
+
+  const userRoutes = [
+    {
+      name: "User Profile",
+      path: "/dashboard",
+    },
+    {
+      name: "My Orders",
+      path: "/dashboard/my-orders",
+    },
+    {
+      name: "Payment History",
+      path: "/dashboard/payment-history",
+    },
+  ];
+
+  let routes = [];
+  const { role, isRoleLoading } = useRole();
+  if (role === "vendor") routes = vendorRoutes;
+  else if (role === "admin") routes = adminRoutes;
+  else if (role === "user") routes = userRoutes;
 
   const { mode, setMode } = useColorScheme();
 
@@ -64,7 +114,7 @@ const Sidebar = () => {
   const handleSignOut = async () => {
     try {
       setIsLoading(true);
-      // await axiosSecure.get("/user/logout");
+      await axiosSecure.get("/user/logout");
       await logOut();
       console.log("Sign out successful");
       navigate("/");
@@ -77,6 +127,8 @@ const Sidebar = () => {
   };
 
   console.log("Sidebar rendered");
+
+  if (isRoleLoading) return <LoadContent />;
 
   return (
     <>

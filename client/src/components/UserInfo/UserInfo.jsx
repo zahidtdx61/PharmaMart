@@ -2,16 +2,18 @@ import { Avatar, Dropdown, Menu, MenuButton, MenuItem } from "@mui/joy";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const UserInfo = () => {
   const { user, logOut, setIsLoading } = useAuth();
   const { photoURL, displayName } = user || {};
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   const handleSignOut = async () => {
     try {
       setIsLoading(true);
-      // await axiosSecure.get("/user/logout");
+      await axiosSecure.get("/user/logout");
       await logOut();
       console.log("Sign out successful");
       navigate("/");

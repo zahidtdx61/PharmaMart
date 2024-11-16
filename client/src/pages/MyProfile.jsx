@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import LoadContent from "../components/Loader/LoadContent";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Avatar } from "@mui/joy";
 
 const MyProfile = () => {
   const session = useAxiosSecure();
@@ -34,11 +35,7 @@ const MyProfile = () => {
       <div className="mt-6">
         <div className="">
           <div className="flex flex-col items-center">
-            <img
-              src={photoURL}
-              alt="Profile"
-              className="w-32 h-32 rounded-full"
-            />
+            <Avatar src={photoURL} alt={displayName} size="lg" />
           </div>
           <div className="mx-auto w-fit mt-12">
             <h3 className="text-lg font-semibold mt-4">{displayName}</h3>
