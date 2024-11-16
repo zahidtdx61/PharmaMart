@@ -4,6 +4,7 @@ import Dashboard from "../layouts/Dashboard/Dashboard";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import AddCategory from "../pages/AddCategory";
 import Cart from "../pages/Cart";
+import Checkout from "../pages/Checkout";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
 import ManageCategory from "../pages/ManageCategory";
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
       },
     ],
   },

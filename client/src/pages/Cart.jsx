@@ -10,6 +10,7 @@ import {
   getFromLocalStorage,
   increaseOneFromCart,
 } from "../utils";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { user } = useAuth();
@@ -18,6 +19,9 @@ const Cart = () => {
 
   const [cartData, setCartData] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     const user_id = uid || "unregistered";
     const data = getFromLocalStorage(user_id);
@@ -28,8 +32,6 @@ const Cart = () => {
     });
     setTotalPrice(total);
   }, [uid]);
-
-  console.log({ totalPrice });
 
   const removeItem = (id) => {
     const user_id = uid || "unregistered";
@@ -176,7 +178,7 @@ const Cart = () => {
               <h1 className="text-base font-semibold text-primary-teal">
                 Total Price: {totalPrice} BDT
               </h1>
-              <button className="px-3 py-1 bg-primary-teal text-zinc-50 font-semibold font-lexend rounded-md">
+              <button onClick={() => navigate("/checkout")} className="px-3 py-1 bg-primary-teal text-zinc-50 font-semibold font-lexend rounded-md">
                 Checkout
               </button>
             </div>
