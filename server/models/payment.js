@@ -1,9 +1,16 @@
 const { Mongoose } = require("../configs");
 
 const paymentSchema = new Mongoose.Schema({
-  medicine_id: {
-    type: Mongoose.Schema.Types.ObjectId,
-    ref: "Medicine",
+  medicine_id: [
+    {
+      type: Mongoose.Schema.Types.ObjectId,
+      ref: "Medicine",
+      required: true,
+    },
+  ],
+
+  transaction_id: {
+    type: String,
     required: true,
   },
   vendor_id: {
@@ -15,11 +22,6 @@ const paymentSchema = new Mongoose.Schema({
     type: Mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
-  },
-  quantity: {
-    type: Number,
-    required: true,
-    min: 0,
   },
   totalAmount: {
     type: Number,

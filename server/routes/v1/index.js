@@ -15,5 +15,6 @@ router.use("/user", require("./user"));
 router.use("/vendor", require("./vendor"));
 router.use("/medicine", require("./medicine"));
 router.use("/admin", require("./admin"));
+router.use("/payment", require("./payment"));
 
 module.exports = router;

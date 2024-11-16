@@ -3,4 +3,5 @@ module.exports = {
   VendorController: require("./vendorController"),
   MedicineController: require("./medicineController"),
   AdminController: require("./adminController"),
+  PaymentController: require("./paymentController"),
 };
