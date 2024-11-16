@@ -77,8 +77,6 @@ const getProfile = async (req, res) => {
     const user = await User.findOne({ uid });
     const medicines = await Medicine.find({ vendor_id: user._id });
 
-    console.log(medicines);
-
     if (!user) {
       return res.status(StatusCodes.NOT_FOUND).json({
         success: false,
@@ -110,8 +108,19 @@ const getProfile = async (req, res) => {
   }
 };
 
+const logout = async (req, res) => {
+  res.clearCookie("token");
+  return res.status(StatusCodes.OK).json({
+    success: true,
+    message: "User logged out successfully",
+    data: {},
+    error: {},
+  });
+}
+
 module.exports = {
   register,
   getRole,
   getProfile,
+  logout,
 };

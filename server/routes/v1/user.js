@@ -6,5 +6,6 @@ const router = express.Router();
 router.post("/register", createJWT, UserController.register);
 router.get("/profile", verifyJWT, UserController.getProfile);
 router.get("/role", verifyJWT, UserController.getRole);
+router.get("/logout", verifyJWT, UserController.logout);
 
 module.exports = router;
