@@ -5,5 +5,6 @@ const router = express.Router();
 
 router.get("/all-users", verifyJWT, AdminController.getAllUsers);
 router.put("/update-user/:id", verifyJWT, AdminController.updateUser);
+router.put("/update-category/:id", verifyJWT, AdminController.updateCategory);
 
 module.exports = router;

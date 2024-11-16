@@ -1,5 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const User = require("../models/user");
+const Category = require("../models/category");
 
 const getAllUsers = async (req, res) => {
   try {
@@ -45,8 +46,31 @@ const updateUser = async (req, res) => {
   }
 };
 
+const updateCategory = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+  body.updatedAt = new Date();
+
+  try {
+    const category = await Category.findByIdAndUpdate(id, body);
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Category updated successfully",
+      data: category,
+      error: {},
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Category not found",
+      data: {},
+      error: error.message,
+    });
+  }
+};
 
 module.exports = {
   getAllUsers,
   updateUser,
+  updateCategory,
 };
