@@ -21,9 +21,11 @@ const ManageUsers = () => {
 
   const { mutateAsync: changeRole, isLoading: mutationLoading } = useMutation({
     mutationFn: async (data) => {
-      const {role, userId} = data;
+      const { role, userId } = data;
       // console.log(role, userId);
-      const response = await session.put(`/admin/update-user/${userId}`, {role});
+      const response = await session.put(`/admin/update-user/${userId}`, {
+        role,
+      });
       return response.data;
     },
     onSuccess: () => {
@@ -74,7 +76,7 @@ const ManageUsers = () => {
                 <td className="py-2 px-1">{index + 1}</td>
                 <td className="py-2 px-1">{user.name}</td>
                 <td className="py-2 px-1">{user.email}</td>
-                <td className="py-2 px-1">{user.role}</td>
+                <td className="py-2 px-1 capitalize">{user.role}</td>
                 <td className="py-2 px-1">
                   {new Date(user.createdAt).toLocaleDateString()}
                 </td>
@@ -83,7 +85,8 @@ const ManageUsers = () => {
                     onClick={() => handleRoleChange("admin", user._id)}
                     className={`${
                       user.role === "admin" && "cursor-not-allowed opacity-50"
-                    } px-2 py-1 bg-sky-800 text-zinc-100 rounded-md hover:opacity-70`}
+                    } px-2 py-1 bg-sky-400 text-zinc-100 rounded-md hover:opacity-70`}
+                    disabled={user.role === "admin"}
                   >
                     Make Admin
                   </button>
@@ -91,8 +94,9 @@ const ManageUsers = () => {
                     onClick={() => handleRoleChange("vendor", user._id)}
                     className={`${
                       ["admin", "vendor"].indexOf(user?.role) >= 0 &&
-                      "cursor-not-allowed opacity-50"
-                    } px-2 py-1 bg-primary-green text-white rounded-md hover:opacity-70`}
+                      "cursor-not-allowed opacity-50 "
+                    } px-2 py-1 bg-green-800 text-white rounded-md hover:opacity-70`}
+                    disabled={["admin", "vendor"].indexOf(user?.role) >= 0}
                   >
                     Make Vendor
                   </button>

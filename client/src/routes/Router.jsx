@@ -5,12 +5,14 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import Cart from "../pages/Cart";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
+import ManageCategory from "../pages/ManageCategory";
 import ManageMedicines from "../pages/ManageMedicines";
+import ManageUsers from "../pages/ManageUsers";
 import MedicineCategory from "../pages/MedicineCategory";
 import MyProfile from "../pages/MyProfile";
 import Registration from "../pages/Registration";
 import Shop from "../pages/Shop";
-import ManageUsers from "../pages/ManageUsers";
+import AddCategory from "../pages/AddCategory";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +70,18 @@ const router = createBrowserRouter([
       {
         path: "manage-users",
         element: <ManageUsers />,
+      },
+      {
+        path: "manage-categories",
+        element: <ManageCategory />,
+      },
+      {
+        path: "edit-category/:id",
+        element: <AddCategory/>,
+      },
+      {
+        path: "add-new-category",
+        element: <AddCategory/>,
       }
     ],
   },
