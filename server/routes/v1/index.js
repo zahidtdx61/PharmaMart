@@ -14,5 +14,6 @@ router.get("/", (req, res) => {
 router.use("/user", require("./user"));
 router.use("/vendor", require("./vendor"));
 router.use("/medicine", require("./medicine"));
+router.use("/admin", require("./admin"));
 
 module.exports = router;
