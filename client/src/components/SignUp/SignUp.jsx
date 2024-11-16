@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { byteScaleUpload, imageUpload } from "../../utils";
+import { byteScaleUpload } from "../../utils";
 
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
@@ -45,7 +45,7 @@ const SignUp = () => {
     const { uid, email, displayName, photoURL } = user;
     try {
       // console.log({ uid, email, displayName, photoURL, session });
-      const response = await session.post("/user/register", {
+      await session.post("/user/register", {
         uid,
         email,
         name: displayName,
@@ -111,7 +111,7 @@ const SignUp = () => {
       await updateUser(name, photoUrl);
       setUser({ ...user, displayName: name, photoURL: photoUrl });
       console.log("after update", user);
-      
+
       navigate(prevPage);
       addUserToDatabase(user);
       setIsLoading(false);
@@ -122,7 +122,7 @@ const SignUp = () => {
         toast.error("Email already in use");
       setIsLoading(false);
       setUser(null);
-    } finally{
+    } finally {
       setIsLoading(false);
     }
   };

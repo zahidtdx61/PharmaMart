@@ -10,6 +10,7 @@ import MedicineCategory from "../pages/MedicineCategory";
 import MyProfile from "../pages/MyProfile";
 import Registration from "../pages/Registration";
 import Shop from "../pages/Shop";
+import ManageUsers from "../pages/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
         path: "advertisements",
         element: <h1>Advertisements</h1>,
       },
+      {
+        path: "manage-users",
+        element: <ManageUsers />,
+      }
     ],
   },
   {
