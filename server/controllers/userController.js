@@ -2,6 +2,7 @@ const { StatusCodes } = require("http-status-codes");
 const User = require("../models/user");
 const Medicine = require("../models/medicine");
 const Payment = require("../models/payment");
+const SinglePayment = require("../models/singlePayment");
 
 const register = async (req, res) => {
   const user = req.body;
@@ -150,10 +151,44 @@ const getOrders = async (req, res) => {
   }
 };
 
+const getPayments = async (req, res) => {
+  try {
+    const { uid } = req.body;
+    const user = await User.findOne({ uid });
+    const history = await SinglePayment.find({
+      $or: [{ vendor_id: user._id }, { buyer_id: user._id }],
+    }).populate("medicine_id").populate("vendor_id").populate("buyer_id");
+
+    if (!history) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: "History not found",
+        data: {},
+        error: "History not found",
+      });
+    }
+
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "History fetched successfully",
+      data: history,
+      error: {},
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "History not fetched",
+      data: {},
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   register,
   getRole,
   getProfile,
   logout,
   getOrders,
+  getPayments,
 };

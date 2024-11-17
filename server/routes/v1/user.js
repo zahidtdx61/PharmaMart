@@ -8,5 +8,6 @@ router.get("/profile", verifyJWT, UserController.getProfile);
 router.get("/role", verifyJWT, UserController.getRole);
 router.get("/logout", verifyJWT, UserController.logout);
 router.get("/orders", verifyJWT, UserController.getOrders);
+router.get("/payments", verifyJWT, UserController.getPayments);
 
 module.exports = router;
