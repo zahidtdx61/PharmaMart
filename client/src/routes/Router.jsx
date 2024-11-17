@@ -15,6 +15,7 @@ import MyProfile from "../pages/MyProfile";
 import Registration from "../pages/Registration";
 import Shop from "../pages/Shop";
 import UpdateCategory from "../pages/UpdateCategory";
+import Invoice from "../pages/Invoice";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
         path: "/checkout",
         element: <Checkout />,
       },
+      {
+        path:"/invoice/:transaction_id",
+        element: <Invoice />
+      }
     ],
   },
   {
