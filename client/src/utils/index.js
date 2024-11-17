@@ -38,16 +38,23 @@ export const saveToLocalStorage = (key, value) => {
   let data = localStorage.getItem(key);
   value.addedQuantity = 1;
 
+  let failed = false;
   if (data) {
     data = JSON.parse(data);
     if (data.find((item) => item._id === value._id)) {
       data = data.map((item) => {
         if (item._id === value._id) {
-          item.addedQuantity += 1;
+          if (item.addedQuantity >= item.quantity) {
+            item.addedQuantity += 0;
+            failed = true;
+          } else {
+            item.addedQuantity += 1;
+          }
         }
         return item;
       });
       addToLocalStorage(key, JSON.stringify(data));
+      if (failed) return "failed";
     } else {
       addToLocalStorage(key, JSON.stringify([...data, value]));
     }
@@ -84,8 +91,9 @@ export const increaseOneFromCart = (user_id, id) => {
       if (item.addedQuantity >= item.quantity) {
         item.addedQuantity += 0;
         failed = true;
+      } else {
+        item.addedQuantity += 1;
       }
-      item.addedQuantity += 1;
     }
     return item;
   });
@@ -113,7 +121,9 @@ export const imageUpload = async (image) => {
 
 export const byteScaleUpload = async (image) => {
   const baseUrl = "https://api.bytescale.com";
-  const path = `/v2/accounts/${import.meta.env.VITE_Bytescale_accountId}/uploads/form_data`;
+  const path = `/v2/accounts/${
+    import.meta.env.VITE_Bytescale_accountId
+  }/uploads/form_data`;
   const entries = (obj) =>
     Object.entries(obj).filter(([, val]) => (val ?? null) !== null);
   const query = entries({})
@@ -138,10 +148,9 @@ export const byteScaleUpload = async (image) => {
   const result = await response.json();
   if (Math.floor(response.status / 100) !== 2)
     throw new Error(`Bytescale API Error: ${JSON.stringify(result)}`);
-  const {files} = result;
+  const { files } = result;
   if (!files || files.length !== 1)
     throw new Error(`Bytescale API Error: ${JSON.stringify(result)}`);
-  const {fileUrl} = files[0];
+  const { fileUrl } = files[0];
   return fileUrl;
-}
-
+};

@@ -11,8 +11,16 @@ const paymentSchema = new Mongoose.Schema({
         type: Number,
         required: true,
       },
-      price: {
+      pricePerUnit: {
         type: Number,
+        required: true,
+      },
+      id: {
+        type: String,
+        required: true,
+      },
+      vendor_id: {
+        type: String,
         required: true,
       },
     },
