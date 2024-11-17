@@ -9,6 +9,6 @@ router.post(
   PaymentController.createCheckoutSession
 );
 router.post("/complete-payment", verifyJWT, PaymentController.completePayment);
-router.get("/invoice/:transaction_id", PaymentController.getInvoice);
+router.get("/invoice/:transaction_id", verifyJWT, PaymentController.getInvoice);
 
 module.exports = router;
