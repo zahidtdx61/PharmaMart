@@ -120,16 +120,18 @@ const CheckoutForm = () => {
         totalAmount,
         medicines,
       };
-      console.log(paymentInfo);
+      // console.log(paymentInfo);
 
       try {
         await axiosSecure.post("/payment/complete-payment", paymentInfo);
         // console.log(response.data);
 
         toast.success("Payment Successfully");
-        navigate("/dashboard");
+        navigate(`/invoice/${paymentIntent.id}`);
       } catch (err) {
         console.log(err);
+        toast.error("Payment Failed");
+        navigate("/");
       } finally {
         removeFromLocalStorage(uid);
         setProcessing(false);
