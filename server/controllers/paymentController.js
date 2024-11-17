@@ -3,6 +3,7 @@ const User = require("../models/user");
 const Payment = require("../models/payment");
 const { Mongoose, SecretsConfig } = require("../configs");
 const Medicine = require("../models/medicine");
+const SinglePayment = require("../models/singlePayment");
 
 const stripe = require("stripe")(SecretsConfig.STRIPE_SECRET_KEY);
 
@@ -84,9 +85,10 @@ const completePayment = async (req, res) => {
       totalAmount,
     });
 
-    await Mongoose.connection
-      .collection("singlepayments")
-      .insertMany(medicineDetails);
+    // await Mongoose.connection
+    //   .collection("singlepayments")
+    //   .insertMany(medicineDetails);
+    await SinglePayment.insertMany(medicineDetails);
 
     return res.status(StatusCodes.CREATED).json({
       success: true,
