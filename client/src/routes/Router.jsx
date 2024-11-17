@@ -17,6 +17,7 @@ import MyProfile from "../pages/MyProfile";
 import Registration from "../pages/Registration";
 import Shop from "../pages/Shop";
 import UpdateCategory from "../pages/UpdateCategory";
+import PaymentHistory from "../pages/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -73,7 +74,7 @@ const router = createBrowserRouter([
       },
       {
         path: "payment-history",
-        element: <h1>Payment History</h1>,
+        element: <PaymentHistory />,
       },
       {
         path: "advertisements",
@@ -98,7 +99,7 @@ const router = createBrowserRouter([
       {
         path: "my-orders",
         element: <MyOrders />,
-      },
+      }
     ],
   },
   {
