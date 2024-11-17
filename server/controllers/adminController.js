@@ -2,6 +2,7 @@ const { StatusCodes } = require("http-status-codes");
 const User = require("../models/user");
 const Category = require("../models/category");
 const Payment = require("../models/payment");
+const SinglePayment = require("../models/singlePayment");
 
 const getAllUsers = async (req, res) => {
   try {
@@ -87,6 +88,11 @@ const approvePayment = async (req, res) => {
     payment.status = "approved";
     payment.updatedAt = new Date();
     await payment.save();
+
+    await SinglePayment.updateMany(
+      { transaction_id: payment.transaction_id },
+      { status: "approved" }
+    );
 
     return res.status(StatusCodes.OK).json({
       success: true,
