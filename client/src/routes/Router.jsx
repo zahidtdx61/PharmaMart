@@ -14,10 +14,10 @@ import ManageUsers from "../pages/ManageUsers";
 import MedicineCategory from "../pages/MedicineCategory";
 import MyOrders from "../pages/MyOrders";
 import MyProfile from "../pages/MyProfile";
+import PaymentHistory from "../pages/PaymentHistory";
 import Registration from "../pages/Registration";
 import Shop from "../pages/Shop";
 import UpdateCategory from "../pages/UpdateCategory";
-import PaymentHistory from "../pages/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +77,10 @@ const router = createBrowserRouter([
         element: <PaymentHistory />,
       },
       {
+        path: "payment-management",
+        element: <MyOrders />,
+      },
+      {
         path: "advertisements",
         element: <h1>Advertisements</h1>,
       },
@@ -99,7 +103,7 @@ const router = createBrowserRouter([
       {
         path: "my-orders",
         element: <MyOrders />,
-      }
+      },
     ],
   },
   {
