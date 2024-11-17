@@ -105,7 +105,39 @@ const completePayment = async (req, res) => {
   }
 };
 
+const getInvoice = async (req, res) => {
+  const { transaction_id } = req.params;
+
+  try {
+    const payment = await Payment.findOne({ transaction_id });
+    if (!payment) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: "Payment not found",
+        data: {},
+        error: {},
+      });
+    }
+
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Payment details",
+      data: payment,
+      error: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Payment not found",
+      data: {},
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createCheckoutSession,
   completePayment,
+  getInvoice,
 };
