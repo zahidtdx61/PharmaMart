@@ -7,15 +7,16 @@ import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
+import Invoice from "../pages/Invoice";
 import ManageCategory from "../pages/ManageCategory";
 import ManageMedicines from "../pages/ManageMedicines";
 import ManageUsers from "../pages/ManageUsers";
 import MedicineCategory from "../pages/MedicineCategory";
+import MyOrders from "../pages/MyOrders";
 import MyProfile from "../pages/MyProfile";
 import Registration from "../pages/Registration";
 import Shop from "../pages/Shop";
 import UpdateCategory from "../pages/UpdateCategory";
-import Invoice from "../pages/Invoice";
 
 const router = createBrowserRouter([
   {
@@ -48,9 +49,9 @@ const router = createBrowserRouter([
         element: <Checkout />,
       },
       {
-        path:"/invoice/:transaction_id",
-        element: <Invoice />
-      }
+        path: "/invoice/:transaction_id",
+        element: <Invoice />,
+      },
     ],
   },
   {
@@ -93,6 +94,10 @@ const router = createBrowserRouter([
       {
         path: "add-new-category",
         element: <AddCategory />,
+      },
+      {
+        path: "my-orders",
+        element: <MyOrders />,
       },
     ],
   },
