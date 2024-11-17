@@ -103,11 +103,31 @@ const approvePayment = async (req, res) => {
       error: error.message,
     });
   }
-}
+};
+
+const getAllPayments = async (req, res) => {
+  try {
+    const payments = await Payment.find().populate("buyer_id");
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "All payments",
+      data: payments,
+      error: {},
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Payments not found",
+      data: {},
+      error: error.message,
+    });
+  }
+};
 
 module.exports = {
   getAllUsers,
   updateUser,
   updateCategory,
   approvePayment,
+  getAllPayments,
 };
