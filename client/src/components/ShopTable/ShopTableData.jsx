@@ -14,7 +14,11 @@ const ShopTableData = ({ medicine }) => {
 
   const addItemToCart = (item) => {
     const user_id = uid || "unregistered";
-    saveToLocalStorage(user_id, item);
+    const resp = saveToLocalStorage(user_id, item);
+    if (resp === "failed") {
+      toast.error("You can't add more than available quantity");
+      return;
+    }
     toast.success("Added to Cart");
   };
 

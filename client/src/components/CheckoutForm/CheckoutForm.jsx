@@ -102,10 +102,12 @@ const CheckoutForm = () => {
     let medicines = [];
 
     medicineData?.forEach((item) => {
-      const { name, pricePerUnit, addedQuantity } = item;
+      const { name, pricePerUnit, addedQuantity, _id, vendor_id } = item;
       medicines.push({
         name,
-        price: parseFloat(pricePerUnit),
+        id: _id,
+        vendor_id,
+        pricePerUnit: parseFloat(pricePerUnit),
         quantity: parseFloat(addedQuantity),
       });
     });
@@ -114,28 +116,25 @@ const CheckoutForm = () => {
       // console.log("payment---> ", paymentIntent);
       const paymentInfo = {
         transaction_id: paymentIntent.id,
-        buyer_id: user?.uid,
+        uid: user?.uid,
         totalAmount,
         medicines,
       };
       console.log(paymentInfo);
 
       try {
-        await axiosSecure.post(
-          "/payment/complete-payment",
-          paymentInfo
-        );
+        await axiosSecure.post("/payment/complete-payment", paymentInfo);
         // console.log(response.data);
-        removeFromLocalStorage(uid);
 
         toast.success("Payment Successfully");
         navigate("/dashboard");
       } catch (err) {
         console.log(err);
+      } finally {
+        removeFromLocalStorage(uid);
+        setProcessing(false);
       }
     }
-
-    setProcessing(false);
   };
 
   return (
