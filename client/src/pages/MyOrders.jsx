@@ -33,7 +33,7 @@ const MyOrders = () => {
       return response.data;
     },
     onSuccess: () => {
-      toast.success("Order Approved Successfully");
+      toast.success("Payment Approved Successfully");
       refetch();
     },
     onError: () => {},
