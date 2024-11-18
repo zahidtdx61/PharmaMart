@@ -33,10 +33,6 @@ const Sidebar = () => {
       name: "Payment History",
       path: "/dashboard/payment-history",
     },
-    {
-      name: "Advertisements",
-      path: "/dashboard/advertisements",
-    },
   ];
 
   const adminRoutes = [
@@ -59,10 +55,6 @@ const Sidebar = () => {
     {
       name: "Sales Report",
       path: "/dashboard/sales-report",
-    },
-    {
-      name: "Manage Advertisements",
-      path: "/dashboard/manage-advertisements",
     },
   ];
 

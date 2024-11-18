@@ -29,8 +29,6 @@ const Navbar = () => {
     { name: "Home", path: "/" },
     { name: "Shop", path: "/shop" },
     { name: "Cart Items", path: "cart" },
-    { name: "Contact Us", path: "/contact" },
-    { name: "About Us", path: "/about" },
   ];
 
   const { photoURL, displayName } = user || {};
