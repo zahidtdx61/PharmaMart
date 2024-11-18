@@ -57,7 +57,7 @@ const Banner = () => {
           Pharma<span className="font-bold text-sec-mint-green">Mart</span>
         </h1>
         <p className="text-base lg:text-xl w-[80%] md:w-[70%] lg:w-[60%] mx-auto text-slate-200">
-          Welcome to MedEase - Your Trusted Online Pharmacy! Discover a wide
+          Welcome to PharmaMart - Your Trusted Online Pharmacy! Discover a wide
           range of medicines, health essentials, and wellness products at
           unbeatable prices. Shop conveniently, securely, and with confidence.
           Your health, our priority!

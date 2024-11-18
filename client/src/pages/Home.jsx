@@ -3,6 +3,7 @@ import Banner from "../components/Banner/Banner";
 import CategorySection from "../components/CategorySection/CategorySection";
 import Loader from "../components/Loader/Loader";
 import useAuth from "../hooks/useAuth";
+import Testimonials from "../components/Testimonials/Testimonials";
 
 const Home = () => {
   const { isLoading } = useAuth();
@@ -21,6 +22,11 @@ const Home = () => {
 
         <div className="mt-[100px]">
           <CategorySection />
+        </div>
+
+        {/* testimonials */}
+        <div className="mt-8">
+          <Testimonials />
         </div>
       </div>
     </>
