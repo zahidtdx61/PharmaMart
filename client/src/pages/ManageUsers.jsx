@@ -95,7 +95,7 @@ const ManageUsers = () => {
                     className={`${
                       ["admin", "vendor"].indexOf(user?.role) >= 0 &&
                       "cursor-not-allowed opacity-50 "
-                    } px-2 py-1 bg-green-800 text-white rounded-md hover:opacity-70`}
+                    } px-2 py-1 bg-primary-teal text-white rounded-md hover:opacity-70`}
                     disabled={["admin", "vendor"].indexOf(user?.role) >= 0}
                   >
                     Make Vendor

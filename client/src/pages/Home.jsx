@@ -15,7 +15,7 @@ const Home = () => {
       </Helmet>
       <div>
         {/* banner */}
-        <div className="h-fit w-fit mx-auto static">
+        <div className="h-fit w-full mx-auto static">
           <Banner />
         </div>
 
