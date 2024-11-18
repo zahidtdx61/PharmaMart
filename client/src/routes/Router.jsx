@@ -18,6 +18,7 @@ import PaymentHistory from "../pages/PaymentHistory";
 import Registration from "../pages/Registration";
 import Shop from "../pages/Shop";
 import UpdateCategory from "../pages/UpdateCategory";
+import SalesReport from "../pages/SalesReport";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: "payment-management",
         element: <MyOrders />,
+      },
+      {
+        path: "sales-report",
+        element: <SalesReport />,
       },
       {
         path: "advertisements",
