@@ -130,10 +130,34 @@ const getAllPayments = async (req, res) => {
   }
 };
 
+const getAllSinglePayments = async (req, res) => {
+  try {
+    const payments = await SinglePayment.find()
+      .populate("buyer_id")
+      .populate("vendor_id");
+
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Payments found",
+      data: payments,
+      error: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Payments not found",
+      data: {},
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   getAllUsers,
   updateUser,
   updateCategory,
   approvePayment,
   getAllPayments,
+  getAllSinglePayments,
 };
