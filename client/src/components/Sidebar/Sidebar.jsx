@@ -91,7 +91,7 @@ const Sidebar = () => {
 
   const navStyle = (isActive) => {
     return [
-      isActive ? "text-red-600" : "text-primary-green",
+      "text-primary-green",
       isActive
         ? `border-blue-300 px-2 font-semibold ${
             mode === "light" ? "bg-gray-200" : "bg-gray-700"
