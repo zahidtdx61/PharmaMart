@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import LoadContent from "../components/Loader/LoadContent";
 import ManageMedicineTable from "../components/ManageMedicineTable/ManageMedicineTable";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const ManageMedicines = () => {
   const session = useAxiosSecure();
@@ -21,6 +22,10 @@ const ManageMedicines = () => {
 
   return (
     <div className="p-4">
+      <Helmet>
+        <title>PharmaMart | Manage Medicines</title>
+      </Helmet>
+
       <div>
         <h1 className="text-4xl font-semibold text-primary-teal text-center border-b-2 w-fit mx-auto px-2 py-2 border-primary-green">
           Manage Your Medicines

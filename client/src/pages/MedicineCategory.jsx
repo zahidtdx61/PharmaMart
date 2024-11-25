@@ -1,10 +1,11 @@
+import { useColorScheme } from "@mui/joy";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import Loader from "../components/Loader/Loader";
+import ShopTableData from "../components/ShopTable/ShopTableData";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
-import ShopTableData from "../components/ShopTable/ShopTableData";
-import { useColorScheme } from "@mui/joy";
+import { Helmet } from "react-helmet-async";
 
 const MedicineCategory = () => {
   const { id } = useParams();
@@ -24,8 +25,12 @@ const MedicineCategory = () => {
   if (isLoading || medicineLoading) return <Loader />;
 
   console.log({ id, medicines });
-  return <div>
-    <div className="max-w-screen-xl mx-auto overflow-x-scroll lg:overflow-auto">
+  return (
+    <div>
+      <div className="max-w-screen-xl mx-auto overflow-x-scroll lg:overflow-auto">
+      <Helmet>
+        <title>PharmaMart | Medicine Category</title>
+      </Helmet>
         <table className="divide-y w-full divide-gray-200 mt-6 text-lg mx-auto">
           <thead
             className={`${mode === "light" ? "bg-gray-50" : "bg-sky-950"}`}
@@ -82,7 +87,8 @@ const MedicineCategory = () => {
           </tbody>
         </table>
       </div>
-  </div>;
+    </div>
+  );
 };
 
 export default MedicineCategory;

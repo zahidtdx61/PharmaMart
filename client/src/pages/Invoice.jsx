@@ -1,6 +1,7 @@
 import { Divider, useColorScheme } from "@mui/joy";
 import { useQuery } from "@tanstack/react-query";
 import { useRef } from "react";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import generatePDF, { Margin } from "react-to-pdf";
 import LoadContent from "../components/Loader/LoadContent";
@@ -31,6 +32,10 @@ const Invoice = () => {
 
   return (
     <div className="max-w-screen-xl mx-auto">
+      <Helmet>
+        <title>PharmaMart | Invoice</title>
+      </Helmet>
+
       <div ref={targetRef} className="max-w-screen-xl mx-auto">
         {/* logo part */}
         <div className="flex items-center justify-center gap-2">

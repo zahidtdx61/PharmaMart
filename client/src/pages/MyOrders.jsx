@@ -5,6 +5,7 @@ import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useRole from "../hooks/useRole";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const MyOrders = () => {
   const { user } = useAuth();
@@ -49,6 +50,10 @@ const MyOrders = () => {
 
   return (
     <div className="max-w-screen-xl mx-auto">
+      <Helmet>
+        <title>PharmaMart | My Orders</title>
+      </Helmet>
+
       <div>
         <h1 className="text-3xl mt-2 font-semibold text-primary-teal text-center border-b-2 w-fit mx-auto px-2 py-2 border-primary-green">
           {

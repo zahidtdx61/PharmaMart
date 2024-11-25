@@ -11,6 +11,7 @@ import {
   increaseOneFromCart,
 } from "../utils";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Cart = () => {
   const { user } = useAuth();
@@ -78,6 +79,10 @@ const Cart = () => {
 
   return (
     <div className="max-w-screen-lg mx-auto">
+      <Helmet>
+        <title>PharmaMart | Cart</title>
+      </Helmet>
+
       <div>
         <h1 className="text-4xl font-semibold text-primary-teal text-center border-b-2 w-fit mx-auto px-2 py-2 border-primary-green">
           Cart

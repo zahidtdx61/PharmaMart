@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import LoadContent from "../components/Loader/LoadContent";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
   const session = useAxiosSecure();
@@ -49,6 +50,10 @@ const ManageUsers = () => {
 
   return (
     <div className="max-w-screen-lg mx-auto">
+      <Helmet>
+        <title>PharmaMart | Manage Users</title>
+      </Helmet>
+
       <div>
         <h1 className="text-4xl font-semibold text-primary-teal text-center border-b-2 w-fit mx-auto px-2 py-2 border-primary-green">
           Manage All Users

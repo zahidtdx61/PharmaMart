@@ -4,6 +4,7 @@ import Loader from "../components/Loader/Loader";
 import ShopTableData from "../components/ShopTable/ShopTableData";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const Shop = () => {
   const session = useAxiosSecure();
@@ -25,6 +26,9 @@ const Shop = () => {
 
   return (
     <div className="max-w-screen-xl mx-auto p-4">
+      <Helmet>
+        <title>PharmaMart | Shop</title>
+      </Helmet>
       <div>
         <h1 className="text-3xl font-semibold text-primary-teal text-center border-b-2 w-fit mx-auto px-2 py-2 border-primary-green">
           Shop

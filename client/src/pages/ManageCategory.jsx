@@ -5,6 +5,7 @@ import LoadContent from "../components/Loader/LoadContent";
 import ManageCategoryRow from "../components/ManageCategoryRow/ManageCategoryRow";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const ManageCategory = () => {
   const session = useAxiosSecure();
@@ -25,6 +26,10 @@ const ManageCategory = () => {
 
   return (
     <div className="max-w-screen-lg mx-auto mt-4">
+      <Helmet>
+        <title>PharmaMart | Manage Category</title>
+      </Helmet>
+
       <div>
         <h1 className="text-4xl font-semibold text-primary-teal text-center border-b-2 w-fit mx-auto px-2 py-2 border-primary-green">
           Manage Categories

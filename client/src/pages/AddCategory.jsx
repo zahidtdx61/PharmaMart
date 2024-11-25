@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import LoadContent from "../components/Loader/LoadContent";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const AddCategory = () => {
   const { register, handleSubmit } = useForm();
@@ -29,6 +30,9 @@ const AddCategory = () => {
 
   return (
     <div className="max-w-screen-lg mx-auto">
+      <Helmet>
+        <title>PharmaMart | Add Category</title>
+      </Helmet>
       <div className="mt-4">
         <h1 className="w-fit mx-auto text-2xl text-primary-teal border-b-2 border-primary-teal px-2 py-1 font-semibold text-center">
           Add a new Category

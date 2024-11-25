@@ -6,6 +6,7 @@ import CheckoutForm from "../components/CheckoutForm/CheckoutForm";
 import useAuth from "../hooks/useAuth";
 import { getFromLocalStorage } from "../utils";
 import "./Checkout.css";
+import { Helmet } from "react-helmet-async";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -29,6 +30,10 @@ const Checkout = () => {
 
   return (
     <div className="max-w-screen-lg mx-auto">
+      <Helmet>
+        <title>PharmaMart | Checkout</title>
+      </Helmet>
+
       <div>
         <h1 className="text-4xl font-semibold text-primary-teal text-center border-b-2 w-fit mx-auto px-2 py-2 border-primary-green">
           Checkout

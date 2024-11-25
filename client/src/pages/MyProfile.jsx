@@ -3,6 +3,7 @@ import LoadContent from "../components/Loader/LoadContent";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { Avatar } from "@mui/joy";
+import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
   const session = useAxiosSecure();
@@ -23,6 +24,10 @@ const MyProfile = () => {
   // console.log(userData, user);
   return (
     <div className="max-w-screen-xl mx-auto p-4">
+      <Helmet>
+        <title>PharmaMart | My Profile</title>
+      </Helmet>
+
       <div>
         <h1 className="text-4xl font-semibold text-primary-teal text-center border-b-2 w-fit mx-auto px-2 py-2 border-primary-green">
           My Profile

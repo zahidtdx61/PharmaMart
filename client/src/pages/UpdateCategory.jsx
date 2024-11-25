@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
@@ -45,6 +46,10 @@ const UpdateCategory = () => {
 
   return (
     <div className="max-w-screen-lg mx-auto">
+      <Helmet>
+        <title>PharmaMart | Update Category</title>
+      </Helmet>
+
       <div className="mt-4">
         <h1 className="w-fit mx-auto text-2xl text-primary-teal border-b-2 border-primary-teal px-2 py-1 font-semibold text-center">
           Update Category
