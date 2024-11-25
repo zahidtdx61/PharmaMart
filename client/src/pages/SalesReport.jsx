@@ -57,7 +57,7 @@ const SalesReport = () => {
                 name="Sales_Report"
                 fileName="Sales_Report"
                 headers={[
-                  "Sl.No.",
+                  "SL. No.",
                   "Date",
                   "Product",
                   "Buyer-Email",
