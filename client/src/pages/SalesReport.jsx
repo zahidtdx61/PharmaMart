@@ -1,24 +1,16 @@
 import { Divider, useColorScheme } from "@mui/joy";
 import { useQuery } from "@tanstack/react-query";
-import { useRef } from "react";
-import { useDownloadExcel } from "react-export-table-to-excel";
+import { ExportAsExcel } from "react-export-table";
 import LoadContent from "../components/Loader/LoadContent";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const SalesReport = () => {
   const { user } = useAuth();
   const session = useAxiosSecure();
   const { uid, isLoading } = user || {};
   const { mode } = useColorScheme();
-
-  const tableRef = useRef(null);
-
-  const { onDownload } = useDownloadExcel({
-    currentTableRef: tableRef.current,
-    filename: "Sales_Report",
-    sheet: "Sales_Report",
-  });
 
   const { data: payments, isLoading: paymentsLoading } = useQuery({
     queryKey: ["payments", uid],
@@ -28,10 +20,25 @@ const SalesReport = () => {
     },
   });
 
+  let tableData = [];
+  if (payments) {
+    tableData = payments.map((item, index) => [
+      index + 1,
+      new Date(item?.createdAt).toLocaleString("en-IN"),
+      `${item.name} x ${item.quantity}`,
+      item?.buyer_id?.email,
+      item?.vendor_id?.email,
+      item.totalPrice,
+    ]);
+  }
+
   if (paymentsLoading || isLoading) return <LoadContent />;
 
   return (
     <div className="max-w-screen-xl mx-auto">
+      <Helmet>
+        <title>PharmaMart | Sales Report</title>
+      </Helmet>
       <div>
         <h1 className="text-3xl mt-2 font-semibold text-primary-teal text-center border-b-2 w-fit mx-auto px-2 py-2 border-primary-green">
           My Payment History
@@ -45,15 +52,31 @@ const SalesReport = () => {
         {payments?.length > 0 ? (
           <>
             <div className="flex justify-end">
-              <button
-                onClick={onDownload}
-                className="bg-primary-green text-white px-4 py-2 rounded-md mt-4"
+              <ExportAsExcel
+                data={tableData}
+                name="Sales_Report"
+                fileName="Sales_Report"
+                headers={[
+                  "Sl.No.",
+                  "Date",
+                  "Product",
+                  "Buyer-Email",
+                  "Vendor-Email",
+                  "Price",
+                ]}
               >
-                Download Sales Report as Excel
-              </button>
+                {(props) => (
+                  <button
+                    className="bg-primary-green text-white px-4 py-2 rounded-md mt-4"
+                    {...props}
+                  >
+                    Download Sales Report as Excel
+                  </button>
+                )}
+              </ExportAsExcel>
             </div>
 
-            <table ref={tableRef} className="divide-y w-full divide-gray-200 mt-6 text-lg mx-auto">
+            <table className="divide-y w-full divide-gray-200 mt-6 text-lg mx-auto">
               <thead
                 className={`${mode === "light" ? "bg-gray-50" : "bg-sky-950"}`}
               >
