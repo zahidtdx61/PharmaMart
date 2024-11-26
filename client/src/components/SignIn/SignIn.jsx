@@ -109,6 +109,7 @@ const SignIn = ({ tabIndex }) => {
                 required
                 type="email"
                 placeholder="Enter your email"
+                defaultValue={"user@user.user"}
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
               />
             </div>
@@ -163,6 +164,7 @@ const SignIn = ({ tabIndex }) => {
                   required
                   type={isPasswordHidden ? "password" : "text"}
                   placeholder="Enter your password"
+                  defaultValue={"User123"}
                   className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
                 />
               </div>

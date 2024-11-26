@@ -8,7 +8,7 @@ const CategoryCard = ({ category }) => {
           <img
             src={category.image}
             alt={category.name}
-            className="w-full h-[200px] object-cover"
+            className="w-full h-[200px] object-cover hover:scale-105 transition-transform"
           />
         </div>
 
