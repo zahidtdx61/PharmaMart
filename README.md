@@ -129,4 +129,4 @@ npm run dev
 
 ## Contribution
 
-We welcome contributions from the community to enhance and improve Buzz Forums.
+We welcome contributions from the community to enhance and improve PharmaMart.
